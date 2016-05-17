@@ -1,0 +1,5 @@
+C:\Users\admin\Downloads\WCFTransactionDemo\Client\bin\Debug\Client.exe.config
+C:\Users\admin\Downloads\WCFTransactionDemo\Client\bin\Debug\Client.exe
+C:\Users\admin\Downloads\WCFTransactionDemo\Client\bin\Debug\Client.pdb
+C:\Users\admin\Downloads\WCFTransactionDemo\Client\obj\Debug\Client.exe
+C:\Users\admin\Downloads\WCFTransactionDemo\Client\obj\Debug\Client.pdb
