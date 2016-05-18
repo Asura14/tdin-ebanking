@@ -1,19 +1,39 @@
-﻿using System;
+﻿using ServerA;
+using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 
-namespace BankA {
-  [ServiceContract(SessionMode=SessionMode.Required)]
-  public interface IBankAOps {
+namespace BankA
+{
+    [ServiceContract(SessionMode = SessionMode.Required)]
+    public interface IBankAOps
+    {
 
-    [OperationContract]
-    [TransactionFlow(TransactionFlowOption.Allowed)]
-    void Deposit(int acct, double amount);
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        void buyStock(int client_id, double amount, int company_id);
+    
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        void sellStock(int client_id, double amount, int company_id);
 
-    [OperationContract]
-    [TransactionFlow(TransactionFlowOption.Allowed)]
-    void Withdraw(int acct, double amount);
+        [OperationContract]
+        string checkOrder(int order_id);
 
-    [OperationContract]
-    double GetBalance(int acct);
-  }
+        [OperationContract]
+        List<Order> getUnexecutedOrders();
+
+        [OperationContract]
+        List<Order> getClientHistory(int client_id);
+
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        void updateStock(int order_id);
+
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        void test();
+
+    }
+
 }

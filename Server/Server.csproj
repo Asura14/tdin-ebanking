@@ -70,11 +70,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\BankB\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Service References\Supervisor\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,6 +78,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Service References\BankA\Server.BankA.Order.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BankA\ServerA.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BankA\service.wsdl" />
+    <None Include="Service References\BankA\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BankA\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\Supervisor\item21.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -93,46 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\BankA\" />
-    <WCFMetadataStorage Include="Service References\BankB\" />
     <WCFMetadataStorage Include="Service References\Supervisor\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BankA\BankAOps1.wsdl" />
-    <None Include="Service References\BankA\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BankA\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BankA\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BankA\item21.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BankA\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BankB\BankBOps1.wsdl" />
-    <None Include="Service References\BankB\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BankB\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BankB\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BankB\item21.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BankB\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\Supervisor\configuration91.svcinfo" />
@@ -150,12 +119,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BankA\item1.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BankB\item1.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -169,6 +132,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\Supervisor\item1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BankA\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BankA\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BankA\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

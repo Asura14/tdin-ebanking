@@ -3,3 +3,9 @@ C:\Users\admin\Downloads\WCFTransactionDemo\Client\bin\Debug\Client.exe
 C:\Users\admin\Downloads\WCFTransactionDemo\Client\bin\Debug\Client.pdb
 C:\Users\admin\Downloads\WCFTransactionDemo\Client\obj\Debug\Client.exe
 C:\Users\admin\Downloads\WCFTransactionDemo\Client\obj\Debug\Client.pdb
+C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\Client\bin\Debug\Client.exe.config
+C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\Client\bin\Debug\Client.exe
+C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\Client\bin\Debug\Client.pdb
+C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\Client\obj\Debug\Client.exe
+C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\Client\obj\Debug\Client.pdb

@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BankAOps" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="TcpOps_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="TcpOps_buyStock_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <oletx:OleTxAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:oletx="http://schemas.microsoft.com/ws/2006/02/tx/oletx" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="TcpOps_sellStock_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <oletx:OleTxAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:oletx="http://schemas.microsoft.com/ws/2006/02/tx/oletx" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="TcpOps_updateStock_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <oletx:OleTxAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:oletx="http://schemas.microsoft.com/ws/2006/02/tx/oletx" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="TcpOps_test_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <oletx:OleTxAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:oletx="http://schemas.microsoft.com/ws/2006/02/tx/oletx" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServerA" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBankAOps_buyStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:buyStock" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_buyStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:buyStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_sellStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:sellStock" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_sellStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:sellStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_checkOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:checkOrder" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_checkOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:checkOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_getUnexecutedOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:getUnexecutedOrders" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_getUnexecutedOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getUnexecutedOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_getClientHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:getClientHistory" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_getClientHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getClientHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_updateStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:updateStock" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_updateStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updateStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_test_InputMessage">
+    <wsdl:part name="parameters" element="tns:test" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_test_OutputMessage">
+    <wsdl:part name="parameters" element="tns:testResponse" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="IBankAOps">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="buyStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/buyStock" message="tns:IBankAOps_buyStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/buyStockResponse" message="tns:IBankAOps_buyStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="sellStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/sellStock" message="tns:IBankAOps_sellStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/sellStockResponse" message="tns:IBankAOps_sellStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="checkOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/checkOrder" message="tns:IBankAOps_checkOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/checkOrderResponse" message="tns:IBankAOps_checkOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="getUnexecutedOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/getUnexecutedOrders" message="tns:IBankAOps_getUnexecutedOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/getUnexecutedOrdersResponse" message="tns:IBankAOps_getUnexecutedOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="getClientHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/getClientHistory" message="tns:IBankAOps_getClientHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/getClientHistoryResponse" message="tns:IBankAOps_getClientHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="updateStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/updateStock" message="tns:IBankAOps_updateStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/updateStockResponse" message="tns:IBankAOps_updateStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="test">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/test" message="tns:IBankAOps_test_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/testResponse" message="tns:IBankAOps_test_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TcpOps" type="tns:IBankAOps">
+    <wsp:PolicyReference URI="#TcpOps_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="buyStock">
+      <wsp:PolicyReference URI="#TcpOps_buyStock_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IBankAOps/buyStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sellStock">
+      <wsp:PolicyReference URI="#TcpOps_sellStock_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IBankAOps/sellStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkOrder">
+      <soap12:operation soapAction="http://tempuri.org/IBankAOps/checkOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUnexecutedOrders">
+      <soap12:operation soapAction="http://tempuri.org/IBankAOps/getUnexecutedOrders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClientHistory">
+      <soap12:operation soapAction="http://tempuri.org/IBankAOps/getClientHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateStock">
+      <wsp:PolicyReference URI="#TcpOps_updateStock_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IBankAOps/updateStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <wsp:PolicyReference URI="#TcpOps_test_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IBankAOps/test" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BankAOps">
+    <wsdl:port name="TcpOps" binding="tns:TcpOps">
+      <soap12:address location="net.tcp://localhost:8700/BankA/" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8700/BankA/</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

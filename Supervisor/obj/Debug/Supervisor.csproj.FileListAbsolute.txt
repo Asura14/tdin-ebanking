@@ -3,3 +3,8 @@ C:\Users\admin\Downloads\WCFTransactionDemo\Supervisor\bin\Debug\Supervisor.exe
 C:\Users\admin\Downloads\WCFTransactionDemo\Supervisor\bin\Debug\Supervisor.pdb
 C:\Users\admin\Downloads\WCFTransactionDemo\Supervisor\obj\Debug\Supervisor.exe
 C:\Users\admin\Downloads\WCFTransactionDemo\Supervisor\obj\Debug\Supervisor.pdb
+C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\Supervisor\bin\Debug\Supervisor.exe.config
+C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\Supervisor\bin\Debug\Supervisor.exe
+C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\Supervisor\bin\Debug\Supervisor.pdb
+C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\Supervisor\obj\Debug\Supervisor.exe
+C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\Supervisor\obj\Debug\Supervisor.pdb
