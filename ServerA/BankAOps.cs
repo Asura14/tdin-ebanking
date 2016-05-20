@@ -42,7 +42,7 @@ namespace BankA
             try
             {
                 conn.Open();
-                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'sell', " + (amount * stockPrice) + ", " + amount + ", " + (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss") + "', null)";
+                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'sell', " + (amount * stockPrice) + ", " + amount + ", '" + (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss") + "', null)";
                 SqlCommand cmd = new SqlCommand(sqlcmd, conn);
                 rows = cmd.ExecuteNonQuery();
                 if (rows == 1)
@@ -100,12 +100,12 @@ namespace BankA
                             order.Type = (string)results.GetValue(3);
                             order.Value = Convert.ToInt32(results.GetValue(4));
                             order.Quantity = Convert.ToInt32(results.GetValue(5));
-                            //order.Creation_date = (DateTime)results.GetValue(6);
-                            //order.Execution_date = (DateTime)results.GetValue(7);
+                            //DateTime dt;
+                            //DateTime.TryParse((string)results.GetValue(6),out dt);
+                            order.Creation_date = (DateTime)results.GetValue(6);
                             orderList.Add(order);
 
-                            Console.WriteLine(results["id"] + " " + results["type"]);
-                            results.NextResult();
+                            Console.WriteLine(order.ToString());
                         }
                         results.Close();
                     }
