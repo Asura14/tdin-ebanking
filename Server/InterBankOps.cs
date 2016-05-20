@@ -22,12 +22,8 @@ namespace InterBank
         {
             string message = String.Format("Transfer of {0:F2} from B{1} to A{2}", amount, acctB, acctA);
             supervisor.ReportToSupervisor(message);
-            bankAProxy.buyStock(1, 5, 1);/*
-            Server.BankA.Order[] orders = bankAProxy.getUnexecutedOrders();
-            for(int i = 0; i<orders.Length; i++)
-                Console.WriteLine(bankAProxy.getUnexecutedOrders());*/
-
-            Console.WriteLine(bankAProxy.checkOrder(1));
+            //bankAProxy.buyStock(1, 5, 1);/
+            bankAProxy.getUnexecutedOrders();
         }
     }
 }

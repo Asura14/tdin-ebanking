@@ -104,7 +104,7 @@ namespace BankA
                             //order.Execution_date = (DateTime)results.GetValue(7);
                             orderList.Add(order);
 
-                            Console.WriteLine(results["id"]);
+                            Console.WriteLine(results["id"] + " " + results["type"]);
                             results.NextResult();
                         }
                         results.Close();
