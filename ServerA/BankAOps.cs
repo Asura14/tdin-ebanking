@@ -42,7 +42,7 @@ namespace BankA
             try
             {
                 conn.Open();
-                string sqlcmd = "INSERT INTO Stock Values(" + client_id.ToString() + ", unexecuted, sell, " + (amount * stockPrice).ToString() + ", " + amount.ToString() + ", " + new DateTime().ToString() + ")";
+                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'sell', " + (amount * stockPrice) + ", " + amount + ", " + (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss") + "', null)";
                 SqlCommand cmd = new SqlCommand(sqlcmd, conn);
                 rows = cmd.ExecuteNonQuery();
                 if (rows == 1)

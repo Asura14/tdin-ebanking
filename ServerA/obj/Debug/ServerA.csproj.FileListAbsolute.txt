@@ -14,8 +14,3 @@ C:\Users\admin\Downloads\WCFTransactionDemo\ServerA\bin\Debug\ServerA.exe
 C:\Users\admin\Downloads\WCFTransactionDemo\ServerA\bin\Debug\ServerA.pdb
 C:\Users\admin\Downloads\WCFTransactionDemo\ServerA\obj\Debug\ServerA.exe
 C:\Users\admin\Downloads\WCFTransactionDemo\ServerA\obj\Debug\ServerA.pdb
-C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\ServerA\bin\Debug\ServerA.exe.config
-C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\ServerA\bin\Debug\ServerA.exe
-C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\ServerA\bin\Debug\ServerA.pdb
-C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\ServerA\obj\Debug\ServerA.exe
-C:\Users\Luis\Uni\4ano\TDIN\tdin-ebanking\ServerA\obj\Debug\ServerA.pdb
