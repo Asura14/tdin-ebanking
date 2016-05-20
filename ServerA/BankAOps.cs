@@ -20,7 +20,7 @@ namespace BankA
             try
             {
                 conn.Open();
-                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'buy', " + (amount*stockPrice) + ", " + amount + ", '" + (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss") + "', null)";
+                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'buy', " + (amount * stockPrice) + ", " + amount + ", '" + (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss") + "', null)";
                 Console.WriteLine(sqlcmd);
                 SqlCommand cmd = new SqlCommand(sqlcmd, conn);
                 rows = cmd.ExecuteNonQuery();
@@ -84,25 +84,30 @@ namespace BankA
                 try
                 {
                     conn.Open();
-                    string sqlcmd = "SELECT * FROM Stock WHERE state = 'unexecuted'";
-                    SqlCommand cmd = new SqlCommand(sqlcmd, conn);
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT* FROM Stock WHERE state = @unexecuted";
+                    cmd.Parameters.AddWithValue("unexecuted", "unexecuted");
+                    cmd.CommandTimeout = 0;
                     using (SqlDataReader results = cmd.ExecuteReader())
                     {
-                        while (results.Read()){
-                            for (int i=0; i< results.FieldCount; i++)
-                            {
-                                Order order = new Order();
-                                order.Id = (int) results.GetValue(0);
-                                order.Client_id = (int)results.GetValue(1);
-                                order.State = (string)results.GetValue(2);
-                                order.Type = (string)results.GetValue(3);
-                                order.Value = (int)results.GetValue(4);
-                                order.Quantity = (int)results.GetValue(5);
-                                order.Creation_date = (DateTime)results.GetValue(6);
-                                order.Execution_date = (DateTime)results.GetValue(7);
-                                orderList.Add(order);
-                            }
+                        while(results.Read())
+                        {
+                            Order order = new Order();
+                            order.Id = Convert.ToInt32(results["id"]);
+                            order.Client_id = Convert.ToInt32(results.GetValue(1));
+                            order.State = (string)results.GetValue(2);
+                            order.Type = (string)results.GetValue(3);
+                            order.Value = Convert.ToInt32(results.GetValue(4));
+                            order.Quantity = Convert.ToInt32(results.GetValue(5));
+                            //order.Creation_date = (DateTime)results.GetValue(6);
+                            //order.Execution_date = (DateTime)results.GetValue(7);
+                            orderList.Add(order);
+
+                            Console.WriteLine(results["id"]);
+                            results.NextResult();
                         }
+                        results.Close();
                     }
                 }
                 catch (Exception e)
@@ -132,19 +137,16 @@ namespace BankA
                     {
                         while (results.Read())
                         {
-                            for (int i = 0; i < results.FieldCount; i++)
-                            {
-                                Order order = new Order();
-                                order.Id = (int)results.GetValue(0);
-                                order.Client_id = (int)results.GetValue(1);
-                                order.State = (string)results.GetValue(2);
-                                order.Type = (string)results.GetValue(3);
-                                order.Value = (int)results.GetValue(4);
-                                order.Quantity = (int)results.GetValue(5);
-                                order.Creation_date = (DateTime)results.GetValue(6);
-                                order.Execution_date = (DateTime)results.GetValue(7);
-                                orderList.Add(order);
-                            }
+                            Order order = new Order();
+                            order.Id = (int)results.GetValue(0);
+                            order.Client_id = (int)results.GetValue(1);
+                            order.State = (string)results.GetValue(2);
+                            order.Type = (string)results.GetValue(3);
+                            order.Value = (int)results.GetValue(4);
+                            order.Quantity = (int)results.GetValue(5);
+                            order.Creation_date = (DateTime)results.GetValue(6);
+                            order.Execution_date = (DateTime)results.GetValue(7);
+                            orderList.Add(order);
                         }
                     }
                 }
