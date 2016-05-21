@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ServiceModel;
-using Client.InterBank;
-using Client.BankA;
+using ExchangeService.InterBank;
+using ExchangeService.BankA;
 
-namespace Client {
+namespace ExchangeService {
   class Program {
     static void Main(string[] args) {
       int acctA = 121, acctB = 1004;

@@ -8,8 +8,8 @@
     <ProjectGuid>{E6B42E13-0077-4BA9-A0C2-67EE53D562F1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Client</RootNamespace>
-    <AssemblyName>Client</AssemblyName>
+    <RootNamespace>ExchangeService</RootNamespace>
+    <AssemblyName>ExchangeService</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -83,7 +83,7 @@
     <WCFMetadataStorage Include="Service References\InterBank\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BankA\Client.BankA.Order.datasource">
+    <None Include="Service References\BankA\ExchangeService.BankA.Order.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BankA\ServerA.xsd">
