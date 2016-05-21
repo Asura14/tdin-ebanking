@@ -170,11 +170,15 @@ namespace BankA
             try
             {
                 conn.Open();
-                string sqlcmd = "UPDATE Stock SET state = 'executed', execution_date = " + (new DateTime()).ToString();
+                string sqlcmd = "UPDATE Stock SET state = 'executed', execution_date = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +  "' WHERE id =" + order_id;
                 SqlCommand cmd = new SqlCommand(sqlcmd, conn);
                 rows = cmd.ExecuteNonQuery();
                 if (rows == 1)
                     OperationContext.Current.SetTransactionComplete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
             finally
             {
