@@ -11,8 +11,8 @@
 namespace ExchangeService.BankA {
     using System.Runtime.Serialization;
     using System;
-    
-    
+    using System.ServiceModel;
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Order", Namespace="http://schemas.datacontract.org/2004/07/ServerA")]
@@ -207,7 +207,8 @@ namespace ExchangeService.BankA {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class BankAOpsClient : System.ServiceModel.ClientBase<ExchangeService.BankA.IBankAOps>, ExchangeService.BankA.IBankAOps {
-        
+        private InstanceContext instanceContext;
+
         public BankAOpsClient() {
         }
         
@@ -226,7 +227,12 @@ namespace ExchangeService.BankA {
         public BankAOpsClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
-        
+
+        public BankAOpsClient(InstanceContext instanceContext)
+        {
+            this.instanceContext = instanceContext;
+        }
+
         public void buyStock(int client_id, double amount, int company_id) {
             base.Channel.buyStock(client_id, amount, company_id);
         }

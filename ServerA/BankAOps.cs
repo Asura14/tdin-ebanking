@@ -10,10 +10,21 @@ namespace BankA
     public class BankAOps : IBankAOps
     {
         public static string connString = ConfigurationManager.ConnectionStrings["ebanking"].ToString();
+        private List<IBankOpsCallback> _callbackList;
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = false)]
         public void buyStock(int client_id, double amount, int company_id)
         {
+            IBankOpsCallback guest = OperationContext.Current.GetCallbackChannel<IBankOpsCallback>();
+            if (!_callbackList.Contains(guest))
+            {
+                _callbackList.Add(guest);
+            }
+            _callbackList.ForEach(delegate (IBankOpsCallback callback)
+            {
+                callback.notifyStockStockBought(client_id, amount, company_id);
+            });
+
             SqlConnection conn = new SqlConnection(connString);
             int rows;
             double stockPrice = getCompanyStockPrice(company_id);
@@ -36,6 +47,16 @@ namespace BankA
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = false)]
         public void sellStock(int client_id, double amount, int company_id)
         {
+            IBankOpsCallback guest = OperationContext.Current.GetCallbackChannel<IBankOpsCallback>();
+            if (!_callbackList.Contains(guest))
+            {
+                _callbackList.Add(guest);
+            }
+            _callbackList.ForEach(delegate (IBankOpsCallback callback)
+            {
+                callback.notifyStockStockSold(client_id, amount, company_id);
+            });
+
             SqlConnection conn = new SqlConnection(connString);
             int rows;
             double stockPrice = getCompanyStockPrice(company_id);

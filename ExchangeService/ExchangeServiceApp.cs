@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.ServiceModel;
 
 namespace ExchangeService
 {
@@ -23,8 +24,8 @@ namespace ExchangeService
             ordersToExecute = new List<Order>();
             todaysExecutedOrders = new List<Order>();
             proxy = new InterBankOpsClient();
-            bankAProxy = new BankAOpsClient();
-            bankAProxy.buyStock(1, 10, 1);
+            bankAProxy = new BankAOpsClient(new InstanceContext(this));
+            bankAProxy.Open();
             ordersToExecute = bankAProxy.getUnexecutedOrders().ToList();
             
             InitializeComponent();
