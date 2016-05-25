@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.BankA {
+namespace ExchangeService.BankA {
     using System.Runtime.Serialization;
     using System;
-    
-    
+    using System.ServiceModel;
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Order", Namespace="http://schemas.datacontract.org/2004/07/ServerA")]
@@ -186,10 +186,10 @@ namespace Client.BankA {
         string checkOrder(int order_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getUnexecutedOrders", ReplyAction="http://tempuri.org/IBankAOps/getUnexecutedOrdersResponse")]
-        Client.BankA.Order[] getUnexecutedOrders();
+        ExchangeService.BankA.Order[] getUnexecutedOrders();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getClientHistory", ReplyAction="http://tempuri.org/IBankAOps/getClientHistoryResponse")]
-        Client.BankA.Order[] getClientHistory(int client_id);
+        ExchangeService.BankA.Order[] getClientHistory(int client_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/updateStock", ReplyAction="http://tempuri.org/IBankAOps/updateStockResponse")]
         [System.ServiceModel.TransactionFlowAttribute(System.ServiceModel.TransactionFlowOption.Allowed)]
@@ -201,13 +201,14 @@ namespace Client.BankA {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IBankAOpsChannel : Client.BankA.IBankAOps, System.ServiceModel.IClientChannel {
+    public interface IBankAOpsChannel : ExchangeService.BankA.IBankAOps, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class BankAOpsClient : System.ServiceModel.ClientBase<Client.BankA.IBankAOps>, Client.BankA.IBankAOps {
-        
+    public partial class BankAOpsClient : System.ServiceModel.ClientBase<ExchangeService.BankA.IBankAOps>, ExchangeService.BankA.IBankAOps {
+        private InstanceContext instanceContext;
+
         public BankAOpsClient() {
         }
         
@@ -226,7 +227,12 @@ namespace Client.BankA {
         public BankAOpsClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
-        
+
+        public BankAOpsClient(InstanceContext instanceContext)
+        {
+            this.instanceContext = instanceContext;
+        }
+
         public void buyStock(int client_id, double amount, int company_id) {
             base.Channel.buyStock(client_id, amount, company_id);
         }
@@ -239,11 +245,11 @@ namespace Client.BankA {
             return base.Channel.checkOrder(order_id);
         }
         
-        public Client.BankA.Order[] getUnexecutedOrders() {
+        public ExchangeService.BankA.Order[] getUnexecutedOrders() {
             return base.Channel.getUnexecutedOrders();
         }
         
-        public Client.BankA.Order[] getClientHistory(int client_id) {
+        public ExchangeService.BankA.Order[] getClientHistory(int client_id) {
             return base.Channel.getClientHistory(client_id);
         }
         

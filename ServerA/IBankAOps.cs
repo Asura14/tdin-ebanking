@@ -5,7 +5,7 @@ using System.ServiceModel;
 
 namespace BankA
 {
-    [ServiceContract(SessionMode = SessionMode.Required)]
+    [ServiceContract(SessionMode = SessionMode.Required, CallbackContract = typeof(IBankOpsCallback))]
     public interface IBankAOps
     {
 
@@ -33,6 +33,16 @@ namespace BankA
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void test();
+
+    }
+
+    public interface IBankOpsCallback
+    {
+        [OperationContract(IsOneWay = true)]
+        void notifyStockStockBought(int client_id, double amount, int company_id);
+
+        [OperationContract(IsOneWay = true)]
+        void notifyStockStockSold(int client_id, double amount, int company_id);
 
     }
 
