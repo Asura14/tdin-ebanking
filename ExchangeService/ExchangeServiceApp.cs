@@ -24,7 +24,7 @@ namespace ExchangeService
             ordersToExecute = new List<Order>();
             todaysExecutedOrders = new List<Order>();
             proxy = new InterBankOpsClient();
-            bankAProxy = new BankAOpsClient(new InstanceContext(this));
+            bankAProxy = new BankAOpsClient();
             bankAProxy.Open();
             ordersToExecute = bankAProxy.getUnexecutedOrders().ToList();
             

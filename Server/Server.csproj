@@ -78,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Service References\BankA\Server.BankA.Company.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BankA\Server.BankA.Order.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

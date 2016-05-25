@@ -11,8 +11,8 @@
 namespace ExchangeService.BankA {
     using System.Runtime.Serialization;
     using System;
-    using System.ServiceModel;
-
+    
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Order", Namespace="http://schemas.datacontract.org/2004/07/ServerA")]
@@ -170,6 +170,83 @@ namespace ExchangeService.BankA {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Company", Namespace="http://schemas.datacontract.org/2004/07/ServerA")]
+    [System.SerializableAttribute()]
+    public partial class Company : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal CurrentStockPriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal CurrentStockPrice {
+            get {
+                return this.CurrentStockPriceField;
+            }
+            set {
+                if ((this.CurrentStockPriceField.Equals(value) != true)) {
+                    this.CurrentStockPriceField = value;
+                    this.RaisePropertyChanged("CurrentStockPrice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BankA.IBankAOps", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IBankAOps {
@@ -191,13 +268,16 @@ namespace ExchangeService.BankA {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getClientHistory", ReplyAction="http://tempuri.org/IBankAOps/getClientHistoryResponse")]
         ExchangeService.BankA.Order[] getClientHistory(int client_id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getCompanies", ReplyAction="http://tempuri.org/IBankAOps/getCompaniesResponse")]
+        ExchangeService.BankA.Company[] getCompanies();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/updateStock", ReplyAction="http://tempuri.org/IBankAOps/updateStockResponse")]
         [System.ServiceModel.TransactionFlowAttribute(System.ServiceModel.TransactionFlowOption.Allowed)]
         void updateStock(int order_id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/test", ReplyAction="http://tempuri.org/IBankAOps/testResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/deleteOrder", ReplyAction="http://tempuri.org/IBankAOps/deleteOrderResponse")]
         [System.ServiceModel.TransactionFlowAttribute(System.ServiceModel.TransactionFlowOption.Allowed)]
-        void test();
+        void deleteOrder(int order_id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -207,8 +287,7 @@ namespace ExchangeService.BankA {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class BankAOpsClient : System.ServiceModel.ClientBase<ExchangeService.BankA.IBankAOps>, ExchangeService.BankA.IBankAOps {
-        private InstanceContext instanceContext;
-
+        
         public BankAOpsClient() {
         }
         
@@ -227,12 +306,7 @@ namespace ExchangeService.BankA {
         public BankAOpsClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
-
-        public BankAOpsClient(InstanceContext instanceContext)
-        {
-            this.instanceContext = instanceContext;
-        }
-
+        
         public void buyStock(int client_id, double amount, int company_id) {
             base.Channel.buyStock(client_id, amount, company_id);
         }
@@ -253,12 +327,16 @@ namespace ExchangeService.BankA {
             return base.Channel.getClientHistory(client_id);
         }
         
+        public ExchangeService.BankA.Company[] getCompanies() {
+            return base.Channel.getCompanies();
+        }
+        
         public void updateStock(int order_id) {
             base.Channel.updateStock(order_id);
         }
         
-        public void test() {
-            base.Channel.test();
+        public void deleteOrder(int order_id) {
+            base.Channel.deleteOrder(order_id);
         }
     }
 }

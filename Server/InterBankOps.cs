@@ -8,9 +8,14 @@ namespace InterBank
 {
     public class InterBankOps : IInterBankOps
     {
-        BankAOpsClient bankAProxy = new BankAOpsClient();
-        SupervisorOpsClient supervisor = new SupervisorOpsClient();
-
+        SupervisorOpsClient supervisor;
+        BankAOpsClient bankAProxy;
+        public InterBankOps()
+        {
+            bankAProxy = new BankAOpsClient();
+            supervisor = new SupervisorOpsClient();
+        }
+        
         [OperationBehavior(TransactionScopeRequired = true)]
         public void TransferAtoB(int acctA, int acctB, double amount)
         {

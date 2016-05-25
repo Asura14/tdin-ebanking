@@ -69,6 +69,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getCompanies">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getCompaniesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ServerA" minOccurs="0" name="getCompaniesResult" nillable="true" type="q3:ArrayOfCompany" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="updateStock">
     <xs:complexType>
       <xs:sequence>
@@ -81,12 +93,14 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="test">
+  <xs:element name="deleteOrder">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="order_id" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="testResponse">
+  <xs:element name="deleteOrderResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

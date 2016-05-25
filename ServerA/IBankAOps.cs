@@ -5,10 +5,9 @@ using System.ServiceModel;
 
 namespace BankA
 {
-    [ServiceContract(SessionMode = SessionMode.Required, CallbackContract = typeof(IBankOpsCallback))]
+    [ServiceContract(SessionMode = SessionMode.Required)]
     public interface IBankAOps
     {
-
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void buyStock(int client_id, double amount, int company_id);
@@ -27,23 +26,15 @@ namespace BankA
         List<Order> getClientHistory(int client_id);
 
         [OperationContract]
+        List<Company> getCompanies();
+
+        [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void updateStock(int order_id);
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        void test();
-
-    }
-
-    public interface IBankOpsCallback
-    {
-        [OperationContract(IsOneWay = true)]
-        void notifyStockStockBought(int client_id, double amount, int company_id);
-
-        [OperationContract(IsOneWay = true)]
-        void notifyStockStockSold(int client_id, double amount, int company_id);
-
+        void deleteOrder(int order_id);
     }
 
 }

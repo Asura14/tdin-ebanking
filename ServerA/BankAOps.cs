@@ -10,21 +10,10 @@ namespace BankA
     public class BankAOps : IBankAOps
     {
         public static string connString = ConfigurationManager.ConnectionStrings["ebanking"].ToString();
-        private List<IBankOpsCallback> _callbackList;
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = false)]
         public void buyStock(int client_id, double amount, int company_id)
         {
-            IBankOpsCallback guest = OperationContext.Current.GetCallbackChannel<IBankOpsCallback>();
-            if (!_callbackList.Contains(guest))
-            {
-                _callbackList.Add(guest);
-            }
-            _callbackList.ForEach(delegate (IBankOpsCallback callback)
-            {
-                callback.notifyStockStockBought(client_id, amount, company_id);
-            });
-
             SqlConnection conn = new SqlConnection(connString);
             int rows;
             double stockPrice = getCompanyStockPrice(company_id);
@@ -47,16 +36,6 @@ namespace BankA
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = false)]
         public void sellStock(int client_id, double amount, int company_id)
         {
-            IBankOpsCallback guest = OperationContext.Current.GetCallbackChannel<IBankOpsCallback>();
-            if (!_callbackList.Contains(guest))
-            {
-                _callbackList.Add(guest);
-            }
-            _callbackList.ForEach(delegate (IBankOpsCallback callback)
-            {
-                callback.notifyStockStockSold(client_id, amount, company_id);
-            });
-
             SqlConnection conn = new SqlConnection(connString);
             int rows;
             double stockPrice = getCompanyStockPrice(company_id);
@@ -183,6 +162,42 @@ namespace BankA
             }
         }
 
+        public List<Company> getCompanies()
+        {
+            {
+                List<Company> companyList = new List<Company>();
+                SqlConnection conn = new SqlConnection(connString);
+                try
+                {
+                    conn.Open();
+                    string sqlcmd = "SELECT * FROM Company";
+                    SqlCommand cmd = new SqlCommand(sqlcmd, conn);
+                    using (SqlDataReader results = cmd.ExecuteReader())
+                    {
+                        while (results.Read())
+                        {
+                            Company company = new Company();
+                            company.Id = (int)results.GetValue(0);
+                            company.Name = (string)results.GetValue(1);
+                            company.CurrentStockPrice = (decimal)results.GetValue(2);
+                            companyList.Add(company);
+                        }
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message);
+                    return companyList;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+                return companyList;
+            }
+        }
+
+
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = false)]
         public void updateStock(int order_id)
         {
@@ -232,10 +247,24 @@ namespace BankA
             return amount;
         }
 
-        [OperationBehavior(TransactionScopeRequired = true)]
-        public void test()
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = false)]
+        public void deleteOrder(int order_id)
         {
-            Console.WriteLine("boas tardes");
+            SqlConnection conn = new SqlConnection(connString);
+            int rows;
+            try
+            {
+                conn.Open();
+                string sqlcmd = "DELETE FROM Stock WHERE id= " + order_id;
+                SqlCommand cmd = new SqlCommand(sqlcmd, conn);
+                rows = cmd.ExecuteNonQuery();
+                if (rows == 1)
+                    OperationContext.Current.SetTransactionComplete();
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

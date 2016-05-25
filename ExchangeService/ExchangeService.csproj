@@ -95,6 +95,9 @@
     <WCFMetadataStorage Include="Service References\InterBank\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\BankA\ExchangeService.BankA.Company.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BankA\ExchangeService.BankA.Order.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
