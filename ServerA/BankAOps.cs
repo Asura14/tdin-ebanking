@@ -138,14 +138,17 @@ namespace BankA
                         while (results.Read())
                         {
                             Order order = new Order();
-                            order.Id = (int)results.GetValue(0);
-                            order.Client_id = (int)results.GetValue(1);
+                            order.Id = Convert.ToInt32(results["id"]);
+                            order.Client_id = Convert.ToInt32(results.GetValue(1));
                             order.State = (string)results.GetValue(2);
                             order.Type = (string)results.GetValue(3);
-                            order.Value = (int)results.GetValue(4);
-                            order.Quantity = (int)results.GetValue(5);
+                            order.Value = Convert.ToInt32(results.GetValue(4));
+                            order.Quantity = Convert.ToInt32(results.GetValue(5));
                             order.Creation_date = (DateTime)results.GetValue(6);
-                            order.Execution_date = (DateTime)results.GetValue(7);
+                            if (!results.IsDBNull(7))
+                            {
+                                order.Execution_date = (DateTime)results.GetValue(7);
+                            }
                             orderList.Add(order);
                         }
                     }

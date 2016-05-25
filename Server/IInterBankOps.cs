@@ -1,16 +1,27 @@
-﻿using System;
+﻿using Server.BankA;
+using System;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 
 namespace InterBank {
-  [ServiceContract(SessionMode=SessionMode.Required)]
-  public interface IInterBankOps {
+    [ServiceContract]
+    public interface IInterBankOps {
 
-    [OperationContract]
-    [TransactionFlow(TransactionFlowOption.Allowed)]
-    void TransferAtoB(int acctA, int acctB, double amount);
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<Company> GetCompanies();
 
-    [OperationContract]
-    [TransactionFlow(TransactionFlowOption.Allowed)]
-    void TransferBtoA(int acctB, int acctA, double amount);
-  }
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<Order> GetClientHistory(int id);
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<Order> GetUnexecutedOrders();
+
+
+        /*[OperationContract]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped ,Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/PostOrder")]
+        string PostOrder(string clientID, string companyID, string amount, string type);*/
+    }
 }

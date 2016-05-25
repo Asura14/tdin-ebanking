@@ -3,32 +3,53 @@ using System.ServiceModel;
 using Server.BankA;
 using Server.Supervisor;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace InterBank
 {
     public class InterBankOps : IInterBankOps
     {
-        SupervisorOpsClient supervisor;
         BankAOpsClient bankAProxy;
         public InterBankOps()
         {
             bankAProxy = new BankAOpsClient();
-            supervisor = new SupervisorOpsClient();
         }
-        
-        [OperationBehavior(TransactionScopeRequired = true)]
-        public void TransferAtoB(int acctA, int acctB, double amount)
-        {
-            string message = String.Format("Transfer of {0:F2} from A{1} to B{2}", amount, acctA, acctB);
-            supervisor.ReportToSupervisor(message);        }
 
-        [OperationBehavior(TransactionScopeRequired = true)]
-        public void TransferBtoA(int acctB, int acctA, double amount)
+        public List<Company> GetCompanies()
         {
-            string message = String.Format("Transfer of {0:F2} from B{1} to A{2}", amount, acctB, acctA);
-            supervisor.ReportToSupervisor(message);
-            bankAProxy.buyStock(1, 5, 1);
-            bankAProxy.buyStock(1, 10, 1);
+            return bankAProxy.getCompanies().ToList();
         }
+
+        public List<Order> GetUnexecutedOrders()
+        {
+            return bankAProxy.getUnexecutedOrders().ToList();
+        }
+
+        public List<Order> GetClientHistory(int id)
+        {
+            return bankAProxy.getClientHistory(id).ToList();
+        }
+
+
+      /*  public string PostOrder(string clientID, companyID, amount, type )
+        {
+            try
+            {
+                if (h.ToLower().Equals("buy")){
+                    bankAProxy.buyStock(Int32.Parse(x), Convert.ToDouble(z), Int32.Parse(y));
+                    return "success";
+                }
+                else if(h.ToLower().Equals("sell")) {
+                    bankAProxy.buyStock(Int32.Parse(x), Convert.ToDouble(z), Int32.Parse(y));
+                    return "success";
+                }
+            }
+            catch(Exception exc)
+            {
+                return exc.Message;
+            }
+            return "error";
+        }
+        */
     }
 }
