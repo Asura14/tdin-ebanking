@@ -3,4 +3,3 @@ C:\Users\admin\Downloads\WCFTransactionDemo\Server\bin\Debug\Server.exe
 C:\Users\admin\Downloads\WCFTransactionDemo\Server\bin\Debug\Server.pdb
 C:\Users\admin\Downloads\WCFTransactionDemo\Server\obj\Debug\Server.exe
 C:\Users\admin\Downloads\WCFTransactionDemo\Server\obj\Debug\Server.pdb
-C:\Users\admin\IdeaProjects\tdin-ebanking\Server\bin\Debug\Server.exe.config
