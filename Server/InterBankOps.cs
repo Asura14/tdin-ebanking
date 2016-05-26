@@ -103,7 +103,7 @@ namespace InterBank
         {
             try
             {
-                bankAProxy.updateStock(order.Id);
+                bankAProxy.editStock(order);
                 return "success";
             }
             catch (Exception exc)

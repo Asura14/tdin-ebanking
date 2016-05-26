@@ -374,6 +374,10 @@ namespace ExchangeService.BankA {
         [System.ServiceModel.TransactionFlowAttribute(System.ServiceModel.TransactionFlowOption.Allowed)]
         void updateStock(int order_id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/editStock", ReplyAction="http://tempuri.org/IBankAOps/editStockResponse")]
+        [System.ServiceModel.TransactionFlowAttribute(System.ServiceModel.TransactionFlowOption.Allowed)]
+        void editStock(ExchangeService.BankA.Order order);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/deleteOrder", ReplyAction="http://tempuri.org/IBankAOps/deleteOrderResponse")]
         [System.ServiceModel.TransactionFlowAttribute(System.ServiceModel.TransactionFlowOption.Allowed)]
         void deleteOrder(int order_id);
@@ -440,6 +444,10 @@ namespace ExchangeService.BankA {
         
         public void updateStock(int order_id) {
             base.Channel.updateStock(order_id);
+        }
+        
+        public void editStock(ExchangeService.BankA.Order order) {
+            base.Channel.editStock(order);
         }
         
         public void deleteOrder(int order_id) {

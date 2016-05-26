@@ -40,6 +40,10 @@ namespace BankA
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
+        void editStock(Order order);
+
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
         void deleteOrder(int order_id);
     }
 

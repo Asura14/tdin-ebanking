@@ -121,6 +121,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="editStock">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServerA" minOccurs="0" name="order" nillable="true" type="q6:Order" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="editStockResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="deleteOrder">
     <xs:complexType>
       <xs:sequence>

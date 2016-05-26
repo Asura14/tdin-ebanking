@@ -252,6 +252,31 @@ namespace BankA
             return amount;
         }
 
+
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = false)]
+        public void editStock(Order order)
+        {
+            int rows;
+            SqlConnection conn = new SqlConnection(connString);
+            try
+            {
+                conn.Open();
+                string sqlcmd = "UPDATE Stock SET type = '" + order.Type + "' WHERE id= " + order.Id;
+                SqlCommand cmd = new SqlCommand(sqlcmd, conn);
+                rows = cmd.ExecuteNonQuery();
+                if (rows == 1)
+                    OperationContext.Current.SetTransactionComplete();
+            }
+            catch (Exception exc)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = false)]
         public void deleteOrder(int order_id)
         {

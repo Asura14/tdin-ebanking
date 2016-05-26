@@ -29,6 +29,13 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="TcpOps_editStock_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <oletx:OleTxAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:oletx="http://schemas.microsoft.com/ws/2006/02/tx/oletx" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="TcpOps_deleteOrder_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -97,6 +104,12 @@
   <wsdl:message name="IBankAOps_updateStock_OutputMessage">
     <wsdl:part name="parameters" element="tns:updateStockResponse" />
   </wsdl:message>
+  <wsdl:message name="IBankAOps_editStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:editStock" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_editStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:editStockResponse" />
+  </wsdl:message>
   <wsdl:message name="IBankAOps_deleteOrder_InputMessage">
     <wsdl:part name="parameters" element="tns:deleteOrder" />
   </wsdl:message>
@@ -139,6 +152,10 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="updateStock">
       <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/updateStock" message="tns:IBankAOps_updateStock_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/updateStockResponse" message="tns:IBankAOps_updateStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="editStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/editStock" message="tns:IBankAOps_editStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/editStockResponse" message="tns:IBankAOps_editStock_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="deleteOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/deleteOrder" message="tns:IBankAOps_deleteOrder_InputMessage" />
@@ -225,6 +242,16 @@
     <wsdl:operation name="updateStock">
       <wsp:PolicyReference URI="#TcpOps_updateStock_policy" />
       <soap12:operation soapAction="http://tempuri.org/IBankAOps/updateStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="editStock">
+      <wsp:PolicyReference URI="#TcpOps_editStock_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IBankAOps/editStock" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

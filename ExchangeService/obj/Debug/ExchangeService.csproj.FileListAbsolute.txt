@@ -1,0 +1,1 @@
+C:\Users\admin\IdeaProjects\tdin-ebanking\ExchangeService\bin\Debug\ExchangeService.exe.config
