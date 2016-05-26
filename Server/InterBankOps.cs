@@ -31,25 +31,54 @@ namespace InterBank
         }
 
 
-      /*  public string PostOrder(string clientID, companyID, amount, type )
+        public string PostOrder(Order order, Company comp)
         {
             try
             {
-                if (h.ToLower().Equals("buy")){
-                    bankAProxy.buyStock(Int32.Parse(x), Convert.ToDouble(z), Int32.Parse(y));
+                if (order.Type.ToLower().Equals("buy"))
+                {
+                    bankAProxy.buyStock(order.Client_id, order.Quantity, comp.Id);
                     return "success";
                 }
-                else if(h.ToLower().Equals("sell")) {
-                    bankAProxy.buyStock(Int32.Parse(x), Convert.ToDouble(z), Int32.Parse(y));
+                else if (order.Type.ToLower().Equals("sell"))
+                {
+                    bankAProxy.sellStock(order.Id, order.Quantity, comp.Id);
                     return "success";
                 }
+                return order.ToString();
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 return exc.Message;
             }
             return "error";
         }
-        */
+
+        public string DeleteOrder(Order order)
+        {
+            try
+            {
+                bankAProxy.deleteOrder(order.Id);
+                return "success";
+            }
+            catch (Exception exc)
+            {
+                return exc.Message;
+            }
+        }
+
+        public String UpdateOrder(Order order)
+        {
+            try
+            {
+                bankAProxy.updateStock(order.Id);
+                return "success";
+            }
+            catch (Exception exc)
+            {
+                return exc.Message;
+            }
+        }
+
     }
 }

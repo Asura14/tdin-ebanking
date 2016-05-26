@@ -3,9 +3,11 @@ using System;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
-namespace InterBank {
+namespace InterBank
+{
     [ServiceContract]
-    public interface IInterBankOps {
+    public interface IInterBankOps
+    {
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
@@ -20,8 +22,63 @@ namespace InterBank {
         System.Collections.Generic.List<Order> GetUnexecutedOrders();
 
 
-        /*[OperationContract]
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped ,Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/PostOrder")]
-        string PostOrder(string clientID, string companyID, string amount, string type);*/
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "/PostOrder")]
+        string PostOrder(Order order, Company comp);
+
+        [OperationContract]
+        [WebInvoke(Method = "DELETE", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "/DeleteOrder")]
+        string DeleteOrder(Order order);
+
+        [OperationContract]
+        [WebInvoke(Method = "PUT", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "/UpdateOrder")]
+        string UpdateOrder(Order order);
+    }
+
+    public class Client
+    {
+        int id;
+        string name;
+        string email;
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
+            }
+        }
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+            }
+        }
+
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+
+            set
+            {
+                email = value;
+            }
+        }
+
     }
 }
+
