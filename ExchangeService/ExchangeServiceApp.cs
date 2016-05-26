@@ -20,6 +20,7 @@ namespace ExchangeService
         List<Order> todaysExecutedOrders;
         BankAOpsClient bankAProxy;
         InterBankOpsClient proxy;
+        string pass = "tdin2016";
 
         public ExchangeServiceApp()
         {
