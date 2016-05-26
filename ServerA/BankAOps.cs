@@ -269,5 +269,10 @@ namespace BankA
                 conn.Close();
             }
         }
+
+        public Cliente getClient()
+        {
+            return new Cliente();
+        }
     }
 }

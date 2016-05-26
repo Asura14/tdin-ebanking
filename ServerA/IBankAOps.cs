@@ -29,6 +29,9 @@ namespace BankA
         List<Company> getCompanies();
 
         [OperationContract]
+        Cliente getClient();
+
+        [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void updateStock(int order_id);
 

@@ -81,6 +81,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getClient">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getClientResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ServerA" minOccurs="0" name="getClientResult" nillable="true" type="q4:Cliente" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="updateStock">
     <xs:complexType>
       <xs:sequence>
