@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.ServiceModel;
+using System.Net.Mail;
+using System.Net;
 
 namespace ExchangeService
 {
@@ -18,6 +20,7 @@ namespace ExchangeService
         List<Order> todaysExecutedOrders;
         BankAOpsClient bankAProxy;
         InterBankOpsClient proxy;
+        string pass = "tdin2016";
 
         public ExchangeServiceApp()
         {
@@ -61,6 +64,7 @@ namespace ExchangeService
                 bankAProxy.updateStock(id);
                 updateUnexecutedOrders();
                 updateExecutedOrders();
+                sendEmail(tempOrder.Quantity, tempOrder.Value, tempOrder.Type);
             }
             catch (Exception exc)
             {
@@ -104,6 +108,44 @@ namespace ExchangeService
             {
                 Console.WriteLine("Exception: " + e.Message);
             }
+        }
+
+        public void sendEmail(int quantity, double value, string type)
+        {
+            try
+            {/*
+                MailMessage mail = new MailMessage("g.luismiguel14@gmail.com", "contact@joaoalmeida.me");
+                SmtpClient client = new SmtpClient();
+                client.Port = 587;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential("g.luismiguel14@gmail.com", pass);
+                client.Host = "smtp.gmail.com";
+                mail.Subject = "Your Order has been executed";
+                mail.Body = "Dear client, \n Here is your order: " + type + " - " + quantity + "x" + value;
+                client.Send(mail);*/
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.live.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential("luismiguel667@hotmail.com", pass)
+                };
+                using (var message = new MailMessage("luismiguel667@hotmail.com", "contact@joaoalmeida.me")
+                {
+                    Subject = "Your Order has been executed",
+                    Body = "Dear client, \n Here is your order: " + type + " - " + quantity + "x" + value
+                })
+                {
+                    smtp.Send(message);
+                }
+            } catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
         }
     }
 }
