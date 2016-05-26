@@ -17,17 +17,50 @@ namespace InterBank
 
         public List<Company> GetCompanies()
         {
-            return bankAProxy.getCompanies().ToList();
+            List<Company> c = new  List<Company>();
+            try {
+                return bankAProxy.getCompanies().ToList();
+            }
+            catch (Exception exc)
+            {
+                return c;
+            }
         }
 
+
+        public Company GetCompany(int id)
+        {
+            Company c = new Company();
+            try
+            {
+                return bankAProxy.getCompany(id);
+            }
+            catch(Exception exc)
+            {
+                return c;
+            }
+
+        }
         public List<Order> GetUnexecutedOrders()
         {
-            return bankAProxy.getUnexecutedOrders().ToList();
+            try {
+                return bankAProxy.getUnexecutedOrders().ToList();
+            }
+            catch(Exception exc)
+            {
+                return new List<Order>();
+            }
         }
 
         public List<Order> GetClientHistory(int id)
         {
-            return bankAProxy.getClientHistory(id).ToList();
+            try {
+                return bankAProxy.getClientHistory(id).ToList();
+            }
+            catch (Exception exc)
+            {
+                return new List<Order>();
+            }
         }
 
 
@@ -51,7 +84,6 @@ namespace InterBank
             {
                 return exc.Message;
             }
-            return "error";
         }
 
         public string DeleteOrder(Order order)

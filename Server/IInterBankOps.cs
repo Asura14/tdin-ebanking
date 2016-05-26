@@ -10,15 +10,19 @@ namespace InterBank
     {
 
         [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
         System.Collections.Generic.List<Company> GetCompanies();
 
         [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
+        Company GetCompany(int id);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
         System.Collections.Generic.List<Order> GetClientHistory(int id);
 
         [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
         System.Collections.Generic.List<Order> GetUnexecutedOrders();
 
 

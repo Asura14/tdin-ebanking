@@ -9,6 +9,7 @@
   <xs:complexType name="Order">
     <xs:sequence>
       <xs:element minOccurs="0" name="Client_id" type="xs:int" />
+      <xs:element minOccurs="0" name="Company_id" type="xs:int" />
       <xs:element minOccurs="0" name="Creation_date" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Execution_date" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />

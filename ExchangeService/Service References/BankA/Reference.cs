@@ -26,6 +26,9 @@ namespace ExchangeService.BankA {
         private int Client_idField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Company_idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime Creation_dateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -65,6 +68,19 @@ namespace ExchangeService.BankA {
                 if ((this.Client_idField.Equals(value) != true)) {
                     this.Client_idField = value;
                     this.RaisePropertyChanged("Client_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Company_id {
+            get {
+                return this.Company_idField;
+            }
+            set {
+                if ((this.Company_idField.Equals(value) != true)) {
+                    this.Company_idField = value;
+                    this.RaisePropertyChanged("Company_id");
                 }
             }
         }
@@ -351,6 +367,9 @@ namespace ExchangeService.BankA {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getClient", ReplyAction="http://tempuri.org/IBankAOps/getClientResponse")]
         ExchangeService.BankA.Cliente getClient(int client_id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getCompany", ReplyAction="http://tempuri.org/IBankAOps/getCompanyResponse")]
+        ExchangeService.BankA.Company getCompany(int company_id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/updateStock", ReplyAction="http://tempuri.org/IBankAOps/updateStockResponse")]
         [System.ServiceModel.TransactionFlowAttribute(System.ServiceModel.TransactionFlowOption.Allowed)]
         void updateStock(int order_id);
@@ -413,6 +432,10 @@ namespace ExchangeService.BankA {
         
         public ExchangeService.BankA.Cliente getClient(int client_id) {
             return base.Channel.getClient(client_id);
+        }
+        
+        public ExchangeService.BankA.Company getCompany(int company_id) {
+            return base.Channel.getCompany(company_id);
         }
         
         public void updateStock(int order_id) {

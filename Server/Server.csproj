@@ -87,6 +87,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\BankA\Server.BankA.Cliente.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BankA\Server.BankA.Company.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

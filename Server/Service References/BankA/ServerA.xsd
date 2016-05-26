@@ -9,6 +9,7 @@
   <xs:complexType name="Order">
     <xs:sequence>
       <xs:element minOccurs="0" name="Client_id" type="xs:int" />
+      <xs:element minOccurs="0" name="Company_id" type="xs:int" />
       <xs:element minOccurs="0" name="Creation_date" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Execution_date" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
@@ -33,4 +34,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Company" nillable="true" type="tns:Company" />
+  <xs:complexType name="Cliente">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Cliente" nillable="true" type="tns:Cliente" />
 </xs:schema>

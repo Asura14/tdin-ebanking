@@ -15,7 +15,7 @@ namespace Server {
             try
             {
                 ServiceEndpoint ep = host.AddServiceEndpoint(typeof(InterBank.IInterBankOps), new WebHttpBinding(), "");
-                host.Open();
+                host.Open();/*
                 using (ChannelFactory<InterBank.IInterBankOps> cf = new ChannelFactory<InterBank.IInterBankOps>(new WebHttpBinding(), "http://localhost:8000"))
                 {
                     cf.Endpoint.Behaviors.Add(new WebHttpBehavior());
@@ -40,16 +40,19 @@ namespace Server {
                     //Console.WriteLine("   Output: {0}", s);
                     Console.WriteLine("");
                 }
-
+                */
                 Console.WriteLine("Press <ENTER> to terminate");
                 Console.ReadLine();
-
                 host.Close();
             }
             catch (CommunicationException cex)
             {
                 Console.WriteLine("An exception occurred: {0}", cex.Message);
                 host.Abort();
+            }
+            finally
+            {
+                host.Close();
             }
         }
   }
