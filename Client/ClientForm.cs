@@ -69,5 +69,11 @@ namespace Client
             if (proxy.State == CommunicationState.Opened)
                 proxy.Close();
         }
+
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            List<Order> orders = bankAProxy.getUnexecutedOrders().ToList();
+            atualizaLista(orders);
+        }
     }
 }
