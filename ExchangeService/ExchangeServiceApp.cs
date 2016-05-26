@@ -138,5 +138,10 @@ namespace ExchangeService
             }
             
         }
+
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            updateUnexecutedOrders();
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace BankA
     public class BankAOps : IBankAOps
     {
         public static string connString = ConfigurationManager.ConnectionStrings["ebanking"].ToString();
-
+        
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = false)]
         public void buyStock(int client_id, double amount, int company_id)
         {
@@ -20,7 +20,7 @@ namespace BankA
             try
             {
                 conn.Open();
-                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'buy', " + (amount * stockPrice) + ", " + amount + ", '" + (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss") + "', null)";
+                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'buy', " + (amount * stockPrice) + ", " + amount + ", '" + (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss") + "', null, " + company_id + ")";
                 Console.WriteLine(sqlcmd);
                 SqlCommand cmd = new SqlCommand(sqlcmd, conn);
                 rows = cmd.ExecuteNonQuery();
@@ -42,7 +42,7 @@ namespace BankA
             try
             {
                 conn.Open();
-                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'sell', " + (amount * stockPrice) + ", " + amount + ", '" + (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss") + "', null)";
+                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'sell', " + (amount * stockPrice) + ", " + amount + ", '" + (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss") + "', null, " + company_id + " )";
                 SqlCommand cmd = new SqlCommand(sqlcmd, conn);
                 rows = cmd.ExecuteNonQuery();
                 if (rows == 1)
@@ -103,6 +103,7 @@ namespace BankA
                             //DateTime dt;
                             //DateTime.TryParse((string)results.GetValue(6),out dt);
                             order.Creation_date = (DateTime)results.GetValue(6);
+                            order.Company_id = Convert.ToInt32(results.GetValue(8));
                             orderList.Add(order);
 
                             Console.WriteLine(order.ToString());
@@ -145,6 +146,7 @@ namespace BankA
                             order.Value = Convert.ToInt32(results.GetValue(4));
                             order.Quantity = Convert.ToInt32(results.GetValue(5));
                             order.Creation_date = (DateTime)results.GetValue(6);
+                            order.Company_id = Convert.ToInt32(results.GetValue(8));
                             if (!results.IsDBNull(7))
                             {
                                 order.Execution_date = (DateTime)results.GetValue(7);
@@ -253,16 +255,20 @@ namespace BankA
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = false)]
         public void deleteOrder(int order_id)
         {
+            int rows;
             SqlConnection conn = new SqlConnection(connString);
             try
             {
                 conn.Open();
                 string sqlcmd = "DELETE FROM Stock WHERE id= " + order_id;
                 SqlCommand cmd = new SqlCommand(sqlcmd, conn);
-                using (SqlDataReader results = cmd.ExecuteReader())
-                {
+                rows = cmd.ExecuteNonQuery();
+                if (rows == 1)
+                    OperationContext.Current.SetTransactionComplete();
+            }
+            catch(Exception exc)
+            {
 
-                }
             }
             finally
             {
@@ -317,7 +323,7 @@ namespace BankA
                     {
                         company.Id = (int)results.GetValue(0);
                         company.Name = (string)results.GetValue(1);
-                        company.CurrentStockPrice = (int)results.GetValue(2);
+                        company.CurrentStockPrice = (decimal)results.GetValue(2);
                     }
                 }
             }

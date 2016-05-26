@@ -85,6 +85,12 @@
   <wsdl:message name="IBankAOps_getClient_OutputMessage">
     <wsdl:part name="parameters" element="tns:getClientResponse" />
   </wsdl:message>
+  <wsdl:message name="IBankAOps_getCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:getCompany" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_getCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getCompanyResponse" />
+  </wsdl:message>
   <wsdl:message name="IBankAOps_updateStock_InputMessage">
     <wsdl:part name="parameters" element="tns:updateStock" />
   </wsdl:message>
@@ -125,6 +131,10 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="getClient">
       <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/getClient" message="tns:IBankAOps_getClient_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/getClientResponse" message="tns:IBankAOps_getClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="getCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/getCompany" message="tns:IBankAOps_getCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/getCompanyResponse" message="tns:IBankAOps_getCompany_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="updateStock">
       <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/updateStock" message="tns:IBankAOps_updateStock_InputMessage" />
@@ -196,6 +206,15 @@
     </wsdl:operation>
     <wsdl:operation name="getClient">
       <soap12:operation soapAction="http://tempuri.org/IBankAOps/getClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCompany">
+      <soap12:operation soapAction="http://tempuri.org/IBankAOps/getCompany" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

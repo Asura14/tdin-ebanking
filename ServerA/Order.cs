@@ -10,6 +10,7 @@ namespace ServerA
     {
         int id;
         int client_id;
+        int company_id;
         string state;
         string type;
         double value;
@@ -40,6 +41,19 @@ namespace ServerA
             set
             {
                 client_id = value;
+            }
+        }
+
+        public int Company_id
+        {
+            get
+            {
+                return company_id;
+            }
+
+            set
+            {
+                company_id = value;
             }
         }
 

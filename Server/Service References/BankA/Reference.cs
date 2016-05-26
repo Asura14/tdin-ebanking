@@ -26,6 +26,9 @@ namespace Server.BankA {
         private int Client_idField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Company_idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime Creation_dateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -65,6 +68,19 @@ namespace Server.BankA {
                 if ((this.Client_idField.Equals(value) != true)) {
                     this.Client_idField = value;
                     this.RaisePropertyChanged("Client_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Company_id {
+            get {
+                return this.Company_idField;
+            }
+            set {
+                if ((this.Company_idField.Equals(value) != true)) {
+                    this.Company_idField = value;
+                    this.RaisePropertyChanged("Company_id");
                 }
             }
         }
@@ -247,6 +263,83 @@ namespace Server.BankA {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Cliente", Namespace="http://schemas.datacontract.org/2004/07/ServerA")]
+    [System.SerializableAttribute()]
+    public partial class Cliente : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BankA.IBankAOps", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IBankAOps {
@@ -270,6 +363,12 @@ namespace Server.BankA {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getCompanies", ReplyAction="http://tempuri.org/IBankAOps/getCompaniesResponse")]
         Server.BankA.Company[] getCompanies();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getClient", ReplyAction="http://tempuri.org/IBankAOps/getClientResponse")]
+        Server.BankA.Cliente getClient(int client_id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getCompany", ReplyAction="http://tempuri.org/IBankAOps/getCompanyResponse")]
+        Server.BankA.Company getCompany(int company_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/updateStock", ReplyAction="http://tempuri.org/IBankAOps/updateStockResponse")]
         [System.ServiceModel.TransactionFlowAttribute(System.ServiceModel.TransactionFlowOption.Allowed)]
@@ -329,6 +428,14 @@ namespace Server.BankA {
         
         public Server.BankA.Company[] getCompanies() {
             return base.Channel.getCompanies();
+        }
+        
+        public Server.BankA.Cliente getClient(int client_id) {
+            return base.Channel.getClient(client_id);
+        }
+        
+        public Server.BankA.Company getCompany(int company_id) {
+            return base.Channel.getCompany(company_id);
         }
         
         public void updateStock(int order_id) {
