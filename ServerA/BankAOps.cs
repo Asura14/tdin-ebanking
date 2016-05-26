@@ -300,5 +300,37 @@ namespace BankA
             }
             return client;
         }
+
+        public Company getCompany(int company_id)
+        {
+            Company company = new Company();
+
+            SqlConnection conn = new SqlConnection(connString);
+            try
+            {
+                conn.Open();
+                string sqlcmd = "SELECT * FROM Company WHERE id = " + company_id;
+                SqlCommand cmd = new SqlCommand(sqlcmd, conn);
+                using (SqlDataReader results = cmd.ExecuteReader())
+                {
+                    if (results.Read())
+                    {
+                        company.Id = (int)results.GetValue(0);
+                        company.Name = (string)results.GetValue(1);
+                        company.CurrentStockPrice = (int)results.GetValue(2);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new Company();
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return company;
+        }
     }
 }
