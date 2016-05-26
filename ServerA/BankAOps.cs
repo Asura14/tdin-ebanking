@@ -254,15 +254,15 @@ namespace BankA
         public void deleteOrder(int order_id)
         {
             SqlConnection conn = new SqlConnection(connString);
-            int rows;
             try
             {
                 conn.Open();
                 string sqlcmd = "DELETE FROM Stock WHERE id= " + order_id;
                 SqlCommand cmd = new SqlCommand(sqlcmd, conn);
-                rows = cmd.ExecuteNonQuery();
-                if (rows == 1)
-                    OperationContext.Current.SetTransactionComplete();
+                using (SqlDataReader results = cmd.ExecuteReader())
+                {
+
+                }
             }
             finally
             {
@@ -270,9 +270,35 @@ namespace BankA
             }
         }
 
-        public Cliente getClient()
+        public Cliente getClient(int client_id)
         {
-            return new Cliente();
+            Cliente client = new Cliente();
+
+            SqlConnection conn = new SqlConnection(connString);
+            try
+            {
+                conn.Open();
+                string sqlcmd = "SELECT * FROM Client WHERE id = " + client_id;
+                SqlCommand cmd = new SqlCommand(sqlcmd, conn);
+                using (SqlDataReader results = cmd.ExecuteReader())
+                {
+                    if(results.Read())
+                    {
+                        client.Name = (string) results.GetValue(1);
+                        client.Email = (string) results.GetValue(2);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new Cliente();
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return client;
         }
     }
 }

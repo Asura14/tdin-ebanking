@@ -64,7 +64,8 @@ namespace ExchangeService
                 bankAProxy.updateStock(id);
                 updateUnexecutedOrders();
                 updateExecutedOrders();
-                sendEmail(tempOrder.Quantity, tempOrder.Value, tempOrder.Type);
+                Cliente client = bankAProxy.getClient(tempOrder.Client_id);
+                sendEmail(client, tempOrder.Quantity, tempOrder.Value, tempOrder.Type);
             }
             catch (Exception exc)
             {
@@ -110,20 +111,10 @@ namespace ExchangeService
             }
         }
 
-        public void sendEmail(int quantity, double value, string type)
+        public void sendEmail(Cliente client, int quantity, double value, string type)
         {
             try
-            {/*
-                MailMessage mail = new MailMessage("g.luismiguel14@gmail.com", "contact@joaoalmeida.me");
-                SmtpClient client = new SmtpClient();
-                client.Port = 587;
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential("g.luismiguel14@gmail.com", pass);
-                client.Host = "smtp.gmail.com";
-                mail.Subject = "Your Order has been executed";
-                mail.Body = "Dear client, \n Here is your order: " + type + " - " + quantity + "x" + value;
-                client.Send(mail);*/
+            {
                 var smtp = new SmtpClient
                 {
                     Host = "smtp.live.com",
@@ -133,10 +124,10 @@ namespace ExchangeService
                     UseDefaultCredentials = false,
                     Credentials = new NetworkCredential("luismiguel667@hotmail.com", pass)
                 };
-                using (var message = new MailMessage("luismiguel667@hotmail.com", "contact@joaoalmeida.me")
+                using (var message = new MailMessage("luismiguel667@hotmail.com", client.Email)
                 {
                     Subject = "Your Order has been executed",
-                    Body = "Dear client, \n Here is your order: " + type + " - " + quantity + "x" + value
+                    Body = "Dear "+ client.Name + ", \n Congratulations! Your order has been executed. Your" + type + " of " + quantity + " actions, for a total of " + value + "€. \n"
                 })
                 {
                     smtp.Send(message);

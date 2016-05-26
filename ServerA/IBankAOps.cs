@@ -29,7 +29,7 @@ namespace BankA
         List<Company> getCompanies();
 
         [OperationContract]
-        Cliente getClient();
+        Cliente getClient(int client_id);
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]

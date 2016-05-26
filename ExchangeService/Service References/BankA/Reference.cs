@@ -349,7 +349,7 @@ namespace ExchangeService.BankA {
         ExchangeService.BankA.Company[] getCompanies();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getClient", ReplyAction="http://tempuri.org/IBankAOps/getClientResponse")]
-        ExchangeService.BankA.Cliente getClient();
+        ExchangeService.BankA.Cliente getClient(int client_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/updateStock", ReplyAction="http://tempuri.org/IBankAOps/updateStockResponse")]
         [System.ServiceModel.TransactionFlowAttribute(System.ServiceModel.TransactionFlowOption.Allowed)]
@@ -411,8 +411,8 @@ namespace ExchangeService.BankA {
             return base.Channel.getCompanies();
         }
         
-        public ExchangeService.BankA.Cliente getClient() {
-            return base.Channel.getClient();
+        public ExchangeService.BankA.Cliente getClient(int client_id) {
+            return base.Channel.getClient(client_id);
         }
         
         public void updateStock(int order_id) {
