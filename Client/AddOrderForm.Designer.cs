@@ -37,6 +37,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.priceLabel = new System.Windows.Forms.Label();
             this.button = new System.Windows.Forms.Button();
+            this.comboBoxClient = new System.Windows.Forms.ComboBox();
+            this.User = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -117,11 +119,31 @@
             this.button.UseVisualStyleBackColor = true;
             this.button.Click += new System.EventHandler(this.buttonClick);
             // 
+            // comboBoxClient
+            // 
+            this.comboBoxClient.FormattingEnabled = true;
+            this.comboBoxClient.Location = new System.Drawing.Point(150, 35);
+            this.comboBoxClient.Name = "comboBoxClient";
+            this.comboBoxClient.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxClient.TabIndex = 13;
+            this.comboBoxClient.SelectedIndexChanged += new System.EventHandler(this.comboBoxClient_SelectedIndexChanged);
+            // 
+            // User
+            // 
+            this.User.AutoSize = true;
+            this.User.Location = new System.Drawing.Point(150, 9);
+            this.User.Name = "User";
+            this.User.Size = new System.Drawing.Size(31, 13);
+            this.User.TabIndex = 12;
+            this.User.Text = "Cient";
+            // 
             // AddOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 261);
+            this.Controls.Add(this.comboBoxClient);
+            this.Controls.Add(this.User);
             this.Controls.Add(this.button);
             this.Controls.Add(this.priceLabel);
             this.Controls.Add(this.label4);
@@ -149,5 +171,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label priceLabel;
         private System.Windows.Forms.Button button;
+        private System.Windows.Forms.ComboBox comboBoxClient;
+        private System.Windows.Forms.Label User;
     }
 }

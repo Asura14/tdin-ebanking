@@ -16,6 +16,7 @@ namespace Client
         BankAOpsClient bank;
         List<Company> companyList;
         List<String> types;
+        List<Cliente> clients;
 
         public AddOrderForm(BankAOpsClient bank)
         {
@@ -26,12 +27,21 @@ namespace Client
             companyBox.DataSource = companyList;
             companyBox.DisplayMember = "Name";
             typeBox.DataSource = types;
+            retrieveClientInfo();
+            comboBoxClient.DataSource = clients;
+            comboBoxClient.DisplayMember = "Name";
         }
 
         public void retrieveCompaniesInfo()
         {
             this.companyList = bank.getCompanies().ToList();
         }
+
+        public void retrieveClientInfo()
+        {
+            clients = bank.getClients().ToList();
+        }
+
         public void retrieveTypesInfo()
         {
             List<string> types = new List<string>();
@@ -59,13 +69,27 @@ namespace Client
         {
             try {
                 Company selectedCompany = (Company)companyBox.SelectedItem;
-                bank.sellStock(1, Convert.ToDouble(textBox2.Text), selectedCompany.Id);
+                Cliente client = (Cliente)comboBoxClient.SelectedItem;
+                bank.sellStock(client.Id, Convert.ToDouble(textBox2.Text), selectedCompany.Id);
                 this.Close();
             }
             catch (Exception exc)
             {
                 Console.WriteLine(exc.Message);
                 MessageBox.Show("Something Wrong Happened", "Error");
+            }
+        }
+
+        private void comboBoxClient_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Cliente selectedClient = (Cliente)comboBoxClient.SelectedItem;;
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("Exception: " + exc.Message);
+                MessageBox.Show("No order selected", "Error");
             }
         }
     }

@@ -332,6 +332,41 @@ namespace BankA
             return client;
         }
 
+        public List<Cliente> getClients()
+        {
+            {
+                List<Cliente> clientList = new List<Cliente>();
+                SqlConnection conn = new SqlConnection(connString);
+                try
+                {
+                    conn.Open();
+                    string sqlcmd = "SELECT * FROM Client";
+                    SqlCommand cmd = new SqlCommand(sqlcmd, conn);
+                    using (SqlDataReader results = cmd.ExecuteReader())
+                    {
+                        while (results.Read())
+                        {
+                            Cliente client = new Cliente();
+                            client.Id = (int)results.GetValue(0);
+                            client.Name = (string)results.GetValue(1);
+                            client.Email = (string)results.GetValue(2);
+                            clientList.Add(client);
+                        }
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message);
+                    return clientList;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+                return clientList;
+            }
+        }
+
         public Company getCompany(int company_id)
         {
             Company company = new Company();

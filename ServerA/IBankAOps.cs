@@ -32,6 +32,9 @@ namespace BankA
         Cliente getClient(int client_id);
 
         [OperationContract]
+        List<Cliente> getClients();
+
+        [OperationContract]
         Company getCompany(int company_id);
 
         [OperationContract]
