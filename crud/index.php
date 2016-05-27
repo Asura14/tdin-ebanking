@@ -19,6 +19,7 @@
 				<table class="table table-striped table-bordered">
 		              <thead>
 		                <tr>
+		                  <th>Company</th>
 		                  <th>Type</th>
 		                  <th>State</th>
 		                  <th>Quantity</th>
@@ -37,9 +38,11 @@
 					    	'User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.1'
 						);
 					   $response = curlWrap($get_url,'','GET',$headers);
-
 	 				   foreach (json_decode($response,true) as $row) {
 						   		echo '<tr>';
+						   		$response2 = curlWrap('localhost:8000/GetCompany?id='.$row['Company_id'],'','GET',$headers);
+						   		echo '<td>'. json_decode($response2,true)['Name'] . '</td>';
+						   		echo '<td>'. $row['Type'] . '</td>';
 							   	echo '<td>'. $row['Type'] . '</td>';
 							   	echo '<td>'. $row['State'] . '</td>';
 							   	echo '<td>'. $row['Quantity'] . '</td>';

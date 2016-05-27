@@ -32,7 +32,9 @@ namespace Client
                 ordersList.Rows.Clear();
                 foreach (Order ped in orders)
                 {
-                    string[] temp = { ped.Id.ToString(), ped.Client_id.ToString(), ped.Creation_date.ToString(), ped.Quantity.ToString(), ped.State, ped.Type, ped.Value.ToString() };
+                    Company c = bankAProxy.getCompany(ped.Company_id);
+                    Cliente cl = bankAProxy.getClient(ped.Client_id);
+                    string[] temp = { c.Name, cl.Name, ped.Creation_date.ToString(), ped.Quantity.ToString(), ped.State, ped.Type, ped.Value.ToString() };
                     ordersList.Rows.Add(temp);
                 }
             }

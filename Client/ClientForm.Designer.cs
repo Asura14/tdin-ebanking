@@ -30,27 +30,29 @@
         {
             this.components = new System.ComponentModel.Container();
             this.ordersList = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Client_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.addButton = new System.Windows.Forms.Button();
+            this.delButton = new System.Windows.Forms.Button();
+            this.buttonRefresh = new System.Windows.Forms.Button();
+            this.Company = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Client_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Creation_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Typ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.addButton = new System.Windows.Forms.Button();
-            this.delButton = new System.Windows.Forms.Button();
-            this.buttonRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ordersList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // ordersList
             // 
+            this.ordersList.AllowUserToAddRows = false;
+            this.ordersList.AllowUserToDeleteRows = false;
             this.ordersList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ordersList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.Client_id,
+            this.Company,
+            this.Client_name,
             this.Creation_Date,
             this.Quantity,
             this.State,
@@ -58,51 +60,10 @@
             this.Value});
             this.ordersList.Location = new System.Drawing.Point(0, 0);
             this.ordersList.Name = "ordersList";
+            this.ordersList.ReadOnly = true;
             this.ordersList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ordersList.Size = new System.Drawing.Size(744, 308);
             this.ordersList.TabIndex = 0;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "ID";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
-            // Client_id
-            // 
-            this.Client_id.HeaderText = "Client_id";
-            this.Client_id.Name = "Client_id";
-            this.Client_id.ReadOnly = true;
-            // 
-            // Creation_Date
-            // 
-            this.Creation_Date.HeaderText = "Creation Date";
-            this.Creation_Date.Name = "Creation_Date";
-            this.Creation_Date.ReadOnly = true;
-            // 
-            // Quantity
-            // 
-            this.Quantity.HeaderText = "Quantity";
-            this.Quantity.Name = "Quantity";
-            this.Quantity.ReadOnly = true;
-            // 
-            // State
-            // 
-            this.State.HeaderText = "State";
-            this.State.Name = "State";
-            this.State.ReadOnly = true;
-            // 
-            // Typ
-            // 
-            this.Typ.HeaderText = "Type";
-            this.Typ.Name = "Typ";
-            this.Typ.ReadOnly = true;
-            // 
-            // Value
-            // 
-            this.Value.HeaderText = "Value";
-            this.Value.Name = "Value";
-            this.Value.ReadOnly = true;
             // 
             // orderBindingSource
             // 
@@ -138,6 +99,48 @@
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
+            // Company
+            // 
+            this.Company.HeaderText = "Company";
+            this.Company.Name = "Company";
+            this.Company.ReadOnly = true;
+            // 
+            // Client_name
+            // 
+            this.Client_name.HeaderText = "Client Name";
+            this.Client_name.Name = "Client_name";
+            this.Client_name.ReadOnly = true;
+            // 
+            // Creation_Date
+            // 
+            this.Creation_Date.HeaderText = "Creation Date";
+            this.Creation_Date.Name = "Creation_Date";
+            this.Creation_Date.ReadOnly = true;
+            // 
+            // Quantity
+            // 
+            this.Quantity.HeaderText = "Quantity";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            // 
+            // State
+            // 
+            this.State.HeaderText = "State";
+            this.State.Name = "State";
+            this.State.ReadOnly = true;
+            // 
+            // Typ
+            // 
+            this.Typ.HeaderText = "Type";
+            this.Typ.Name = "Typ";
+            this.Typ.ReadOnly = true;
+            // 
+            // Value
+            // 
+            this.Value.HeaderText = "Value";
+            this.Value.Name = "Value";
+            this.Value.ReadOnly = true;
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -162,13 +165,13 @@
         private System.Windows.Forms.BindingSource orderBindingSource;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button delButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Client_id;
+        private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Company;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Client_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Creation_Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn State;
         private System.Windows.Forms.DataGridViewTextBoxColumn Typ;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
-        private System.Windows.Forms.Button buttonRefresh;
     }
 }
