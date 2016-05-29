@@ -127,7 +127,7 @@ namespace ExchangeService
                 using (var message = new MailMessage("luismiguel667@hotmail.com", client.Email)
                 {
                     Subject = "Your Order has been executed",
-                    Body = "Dear "+ client.Name + ", \n Congratulations! Your order has been executed. Your" + type + " of " + quantity + " actions, for a total of " + value + "€. \n"
+                    Body = "Dear "+ client.Name + ", \n Congratulations! Your order has been executed. Your " + type + " of " + quantity + " actions, for a total of " + value + "€. \n"
                 })
                 {
                     smtp.Send(message);
