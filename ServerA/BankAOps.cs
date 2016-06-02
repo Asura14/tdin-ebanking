@@ -37,7 +37,7 @@ namespace BankA
                             using (MessageQueueTransaction trans = new MessageQueueTransaction())
                             {
                                 trans.Begin();
-                                messageQueue.Send("Ordem enviada");
+                                messageQueue.Send("Ordem enviada", trans);
                                 trans.Commit();
                             }
                         }
