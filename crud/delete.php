@@ -1,5 +1,6 @@
 <?php 
 	require 'database.php';
+	session_start();
 	$id = 0;
 	
 	if ( !empty($_GET['id'])) {
@@ -27,7 +28,7 @@
 	    	'User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.1'
 	    	);
 	    $response = curlWrap($get_url,json_encode($order),'DELETE',$headers);
-		header("Location: index.php");
+		header("Location: dashboard.php");
 		
 	} 
 ?>
@@ -53,7 +54,7 @@
 					  <p class="alert alert-error">Are you sure to delete ?</p>
 					  <div class="form-actions">
 						  <button type="submit" class="btn btn-danger">Yes</button>
-						  <a class="btn" href="index.php">No</a>
+						  <a class="btn" href="dashboard.php">No</a>
 						</div>
 					</form>
 				</div>

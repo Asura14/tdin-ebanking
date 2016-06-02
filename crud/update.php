@@ -1,7 +1,7 @@
 <?php 
 	
 	require 'database.php';
-
+	session_start();
 	$id = null;
 	$type = 'sell';
 	if ( !empty($_GET['id'])) {
@@ -10,7 +10,7 @@
 	}
 	
 	if ( null==$id ) {
-		header("Location: index.php");
+		header("Location: dashboard.php");
 	}
 	
 	if ( !empty($_POST)) {
@@ -33,7 +33,7 @@
 	    	'User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.1'
 	    	);
 	    $response = curlWrap($get_url,json_encode($order),'PUT',$headers);
-		header("Location: index.php");
+		header("Location: dashboard.php");
 
 	}
 ?>

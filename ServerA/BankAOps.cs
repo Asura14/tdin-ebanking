@@ -377,6 +377,38 @@ namespace BankA
             return client;
         }
 
+        public Cliente getClientByEmail(Cliente cliente)
+        {
+            Cliente client = new Cliente();
+
+            SqlConnection conn = new SqlConnection(connString);
+            try
+            {
+                conn.Open();
+                string sqlcmd = "SELECT * FROM Client WHERE email = '" + cliente.Email+"'";
+                SqlCommand cmd = new SqlCommand(sqlcmd, conn);
+                using (SqlDataReader results = cmd.ExecuteReader())
+                {
+                    if (results.Read())
+                    {
+                        client.Id = (int)results.GetValue(0);
+                        client.Name = (string)results.GetValue(1);
+                        client.Email = (string)results.GetValue(2);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new Cliente();
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return client;
+        }
+
         public List<Cliente> getClients()
         {
             {

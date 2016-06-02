@@ -14,3 +14,4 @@ C:\Users\admin\Downloads\WCFTransactionDemo\ServerA\bin\Debug\ServerA.exe
 C:\Users\admin\Downloads\WCFTransactionDemo\ServerA\bin\Debug\ServerA.pdb
 C:\Users\admin\Downloads\WCFTransactionDemo\ServerA\obj\Debug\ServerA.exe
 C:\Users\admin\Downloads\WCFTransactionDemo\ServerA\obj\Debug\ServerA.pdb
+C:\Users\admin\IdeaProjects\tdin-ebanking\ServerA\bin\Debug\ServerA.exe

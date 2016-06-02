@@ -1,5 +1,5 @@
 <?php 
-	
+	session_start();
 	require 'database.php';
 
 	if ( !empty($_POST)) {
@@ -15,7 +15,7 @@
 		$order = array();
 		$order['order'] = array(
 			'Id'			=>	1,
-			'Client_id'		=> 	1,
+			'Client_id'		=> 	$_SESSION['id'],
 			'Company_id'	=> $company,
 			'State'			=>	'unexecuted',
 			'Value'			=>	30,
@@ -40,7 +40,7 @@
 	    $response = curlWrap($get_url,json_encode($order),'POST',$headers);
 	    echo $response;
 	    if($response == "success"){
-	    	header("Location: index.php");
+	    	header("Location: dashboard.php");
 	    }
 	}
 ?>
@@ -90,7 +90,7 @@
 					  </div>
 					  <div class="form-actions">
 						  <button type="submit" class="btn btn-success">Create</button>
-						  <a class="btn" href="index.php">Back</a>
+						  <a class="btn" href="dashboard.php">Back</a>
 						</div>
 					</form>
 				</div>

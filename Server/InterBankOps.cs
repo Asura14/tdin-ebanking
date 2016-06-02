@@ -63,6 +63,22 @@ namespace InterBank
             }
         }
 
+        public Cliente GetClientId(Cliente cliente)
+        {
+            Cliente c = new Cliente();
+            c.Id = 0;
+            try
+            {
+                return bankAProxy.getClientByEmail(cliente);
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+                return c;
+            }
+
+        }
+
 
         public string PostOrder(Order order, Company comp)
         {

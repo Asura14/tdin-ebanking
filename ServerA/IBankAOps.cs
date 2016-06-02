@@ -32,6 +32,9 @@ namespace BankA
         Cliente getClient(int client_id);
 
         [OperationContract]
+        Cliente getClientByEmail(Cliente cliente);
+
+        [OperationContract]
         List<Cliente> getClients();
 
         [OperationContract]

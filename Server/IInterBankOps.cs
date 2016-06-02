@@ -22,6 +22,11 @@ namespace InterBank
         System.Collections.Generic.List<Order> GetClientHistory(int id);
 
         [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "/ClientId")]
+        Cliente GetClientId(Cliente cliente);
+
+
+        [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
         System.Collections.Generic.List<Order> GetUnexecutedOrders();
 

@@ -367,6 +367,9 @@ namespace Server.BankA {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getClient", ReplyAction="http://tempuri.org/IBankAOps/getClientResponse")]
         Server.BankA.Cliente getClient(int client_id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getClientByEmail", ReplyAction="http://tempuri.org/IBankAOps/getClientByEmailResponse")]
+        Server.BankA.Cliente getClientByEmail(Server.BankA.Cliente cliente);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getClients", ReplyAction="http://tempuri.org/IBankAOps/getClientsResponse")]
         Server.BankA.Cliente[] getClients();
         
@@ -439,6 +442,10 @@ namespace Server.BankA {
         
         public Server.BankA.Cliente getClient(int client_id) {
             return base.Channel.getClient(client_id);
+        }
+        
+        public Server.BankA.Cliente getClientByEmail(Server.BankA.Cliente cliente) {
+            return base.Channel.getClientByEmail(cliente);
         }
         
         public Server.BankA.Cliente[] getClients() {
