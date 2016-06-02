@@ -101,6 +101,7 @@
     <WCFMetadataStorage Include="Service References\InterBank\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\BankA\BankAOps.wsdl" />
     <None Include="Service References\BankA\Client.BankA.Cliente.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -110,14 +111,13 @@
     <None Include="Service References\BankA\Client.BankA.Order.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\BankA\ServerA.xsd">
+    <None Include="Service References\BankA\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\BankA\service.wsdl" />
-    <None Include="Service References\BankA\service.xsd">
+    <None Include="Service References\BankA\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\BankA\service1.xsd">
+    <None Include="Service References\BankA\item2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\InterBank\configuration91.svcinfo" />
@@ -154,6 +154,17 @@
     <None Include="Service References\InterBank\item1.disco" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AddOrderForm.resx">
+      <DependentUpon>AddOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientForm.resx">
+      <DependentUpon>ClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BankA\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Service References\BankA\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -164,14 +175,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="AddOrderForm.resx">
-      <DependentUpon>AddOrderForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientForm.resx">
-      <DependentUpon>ClientForm.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

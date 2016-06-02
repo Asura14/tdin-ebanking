@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using System.ServiceModel;
 using System.Net.Mail;
 using System.Net;
+using System.Messaging;
+using System.IO;
 
 namespace ExchangeService
 {
@@ -22,6 +24,51 @@ namespace ExchangeService
         InterBankOpsClient proxy;
         string pass = "tdin2016";
 
+
+        public List<string> receiveMessages()
+        {
+            List<string> tmp = new List<string>();
+
+            if (MessageQueue.Exists(@".\Private$\supervisor"))
+            {
+
+                MessageQueue messageQueue = new MessageQueue(@".\Private$\supervisor");
+                System.Messaging.Message[] messages = messageQueue.GetAllMessages();
+
+                string rec = "";
+                //string sqlcmd;
+                foreach (System.Messaging.Message message in messages)
+                {
+                    //string line;
+                    message.Formatter = new System.Messaging.XmlMessageFormatter(new String[] { });
+                    StreamReader sr = new StreamReader(message.BodyStream);
+
+                    while (sr.Peek() >= 0)
+                    {
+                        //Ordem o = new Ordem();
+                        rec += sr.ReadLine();
+
+                    }
+                    Console.WriteLine(rec + "\n");
+                    //string[] words = rec.Split('+');
+
+                    /*Ordem o = new Ordem();
+                    o.id = Int32.Parse(words[2]);
+                    o.companyId = Int32.Parse(words[3]);
+                    o.type = Int32.Parse(words[4]);
+                    o.quant = Int32.Parse(words[5]);
+                    o.creationDate = words[6];
+                    ordensNaoExecutadas.Add(o);*/
+                    tmp.Add(rec);
+                    rec = "";
+
+                }
+                messageQueue.Purge();
+            }
+
+
+            return tmp;
+        }
         public ExchangeServiceApp()
         {
             ordersToExecute = new List<Order>();
@@ -142,6 +189,11 @@ namespace ExchangeService
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             updateUnexecutedOrders();
+            List<string> msg = receiveMessages();
+            foreach (string s in msg)
+            {
+                Console.WriteLine("Message");
+            }
         }
     }
 }

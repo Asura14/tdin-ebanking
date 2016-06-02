@@ -69,8 +69,15 @@ namespace Client
         {
             try {
                 Company selectedCompany = (Company)companyBox.SelectedItem;
+                string type = (string)typeBox.SelectedItem;
                 Cliente client = (Cliente)comboBoxClient.SelectedItem;
-                bank.sellStock(client.Id, Convert.ToDouble(textBox2.Text), selectedCompany.Id);
+                if (type.Equals("Sell")){
+                    bank.sellStock(client.Id, Convert.ToDouble(textBox2.Text), selectedCompany.Id);
+                }
+                else
+                {
+                    bank.buyStock(client.Id, Convert.ToDouble(textBox2.Text), selectedCompany.Id);
+                }
                 this.Close();
             }
             catch (Exception exc)

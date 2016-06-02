@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using System.Collections.Generic;
 
 namespace Supervisor {
   [ServiceContract]
@@ -8,5 +9,6 @@ namespace Supervisor {
     [OperationContract(IsOneWay=true)]
     [TransactionFlow(TransactionFlowOption.Allowed)]
     void ReportToSupervisor(string message);
-  }
+
+    }
 }

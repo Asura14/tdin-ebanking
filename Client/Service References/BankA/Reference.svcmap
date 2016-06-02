@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="83997789-c5ec-4978-a49e-575ebba8de2c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="64e081c2-f6d3-4003-a4a0-c887c01244a9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -18,13 +18,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8740/Design_Time_Addresses/BankA/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://localhost:8740/Design_Time_Addresses/BankA/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="14f462ce-3f1f-405b-aef4-7e0f93260804" SourceId="1" SourceUrl="http://localhost:8740/Design_Time_Addresses/BankA/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="cb1b7480-edae-4778-a0d5-822ebe4378b0" SourceId="1" SourceUrl="http://localhost:8740/Design_Time_Addresses/BankA/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="ddd3add9-ad67-41de-a3b5-0adc1b4bfef4" SourceId="1" SourceUrl="http://localhost:8740/Design_Time_Addresses/BankA/mex" />
-    <MetadataFile FileName="ServerA.xsd" MetadataType="Schema" ID="11a58ba0-fac3-4c2c-b899-5114eba5fff0" SourceId="1" SourceUrl="http://localhost:8740/Design_Time_Addresses/BankA/mex" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="0374b8ee-40d4-443d-8ca0-9c692af1cd79" SourceId="1" SourceUrl="http://localhost:8740/Design_Time_Addresses/BankA/?xsd=xsd1" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="c46d8aa7-c0ec-4b75-9f4b-f34557d9640c" SourceId="1" SourceUrl="http://localhost:8740/Design_Time_Addresses/BankA/?xsd=xsd2" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="f988fed4-a24d-4c05-a019-94a11da3dacc" SourceId="1" SourceUrl="http://localhost:8740/Design_Time_Addresses/BankA/?xsd=xsd0" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="a33f4711-c5cf-40f9-a826-b9bc6bb2fe33" SourceId="1" SourceUrl="http://localhost:8740/Design_Time_Addresses/BankA/?disco" />
+    <MetadataFile FileName="BankAOps.wsdl" MetadataType="Wsdl" ID="753fa76d-a417-4c23-a475-e1a2ea8807fa" SourceId="1" SourceUrl="http://localhost:8740/Design_Time_Addresses/BankA/?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

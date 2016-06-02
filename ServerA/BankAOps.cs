@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Messaging;
 using ServerA;
 using System.Collections.Generic;
 
@@ -25,7 +26,29 @@ namespace BankA
                 SqlCommand cmd = new SqlCommand(sqlcmd, conn);
                 rows = cmd.ExecuteNonQuery();
                 if (rows == 1)
+                {
                     OperationContext.Current.SetTransactionComplete();
+                    MessageQueue messageQueue = null;
+                    if (MessageQueue.Exists(@".\Private$\supervisor"))
+                    {
+                        messageQueue = new MessageQueue(@".\Private$\supervisor");
+                        if (messageQueue.Transactional == true)
+                        {
+                            using (MessageQueueTransaction trans = new MessageQueueTransaction())
+                            {
+                                trans.Begin();
+                                messageQueue.Send("Ordem enviada");
+                                trans.Commit();
+                            }
+                        }
+                    }
+                    else
+                        messageQueue.Send("First ever Message is sent to MSMQ");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
             finally
             {
