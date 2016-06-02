@@ -23,6 +23,8 @@ namespace ExchangeService
         BankAOpsClient bankAProxy;
         InterBankOpsClient proxy;
         string pass = "tdin2016";
+        string dir = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+        string serializationFile;
 
         public ExchangeServiceApp()
         {
@@ -31,6 +33,8 @@ namespace ExchangeService
             bankAProxy = new BankAOpsClient();
             bankAProxy.Open();
             //ordersToExecute = bankAProxy.getUnexecutedOrders().ToList();
+            serializationFile = Path.Combine(dir, "Order.bin");
+            load();
             receiveMessages();
             InitializeComponent();
 
@@ -114,6 +118,7 @@ namespace ExchangeService
                 updateExecutedOrders();
                 Cliente client = bankAProxy.getClient(tempOrder.Client_id);
                 sendEmail(client, tempOrder.Quantity, tempOrder.Value, tempOrder.Type);
+                save();
             }
             catch (Exception exc)
             {
@@ -197,6 +202,40 @@ namespace ExchangeService
                 Console.WriteLine("Message");
             }
             updateUnexecutedOrders();
+            save();
+        }
+
+        private void save()
+        {
+            try
+            {
+                using (Stream stream = File.Open(serializationFile, FileMode.Create))
+                {
+                    var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+                    bformatter.Serialize(stream, ordersToExecute);
+                }
+            } catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        private void load()
+        {
+            try
+            {
+                using (Stream stream = File.Open(serializationFile, FileMode.Open))
+                {
+                    var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+                    ordersToExecute = (List<Order>)bformatter.Deserialize(stream);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
