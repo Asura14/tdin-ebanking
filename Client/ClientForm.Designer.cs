@@ -34,6 +34,7 @@
             this.addButton = new System.Windows.Forms.Button();
             this.delButton = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Company = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Client_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Creation_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +52,7 @@
             this.ordersList.AllowUserToDeleteRows = false;
             this.ordersList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ordersList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
             this.Company,
             this.Client_name,
             this.Creation_Date,
@@ -98,6 +100,12 @@
             this.buttonRefresh.Text = "Refresh";
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
             // 
             // Company
             // 
@@ -166,6 +174,7 @@
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button delButton;
         private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Company;
         private System.Windows.Forms.DataGridViewTextBoxColumn Client_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Creation_Date;

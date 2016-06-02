@@ -24,6 +24,18 @@ namespace ExchangeService
         InterBankOpsClient proxy;
         string pass = "tdin2016";
 
+        public ExchangeServiceApp()
+        {
+            ordersToExecute = new List<Order>();
+            todaysExecutedOrders = new List<Order>();
+            bankAProxy = new BankAOpsClient();
+            bankAProxy.Open();
+            //ordersToExecute = bankAProxy.getUnexecutedOrders().ToList();
+            receiveMessages();
+            InitializeComponent();
+
+            updateUnexecutedOrders();
+        }
 
         public List<string> receiveMessages()
         {
@@ -50,36 +62,25 @@ namespace ExchangeService
 
                     }
                     Console.WriteLine(rec + "\n");
-                    //string[] words = rec.Split('+');
+                    string[] words = rec.Split('+');
 
-                    /*Ordem o = new Ordem();
-                    o.id = Int32.Parse(words[2]);
-                    o.companyId = Int32.Parse(words[3]);
-                    o.type = Int32.Parse(words[4]);
-                    o.quant = Int32.Parse(words[5]);
-                    o.creationDate = words[6];
-                    ordensNaoExecutadas.Add(o);*/
-                    tmp.Add(rec);
+                    DateTime datetime = DateTime.ParseExact(words[5], "yyyy-MM-dd HH:mm:ss", null);
+                    Order o = new Order();
+                    o.Id = Int32.Parse(words[1]);
+                    o.Company_id = Int32.Parse(words[2]);
+                    o.Type = words[3];
+                    o.Quantity = Int32.Parse(words[4]);
+                    o.Creation_date = datetime;
+                    o.Client_id = Int32.Parse(words[6]);
+                    o.Value = Int32.Parse(words[7]);
+                    o.State = "unexecuted";
+                    ordersToExecute.Add(o);
                     rec = "";
 
                 }
                 messageQueue.Purge();
             }
-
-
             return tmp;
-        }
-        public ExchangeServiceApp()
-        {
-            ordersToExecute = new List<Order>();
-            todaysExecutedOrders = new List<Order>();
-            bankAProxy = new BankAOpsClient();
-            bankAProxy.Open();
-            //ordersToExecute = bankAProxy.getUnexecutedOrders().ToList();
-            
-            InitializeComponent();
-
-            updateUnexecutedOrders();
         }
 
         private void maskedTextBox2_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
@@ -108,6 +109,7 @@ namespace ExchangeService
                 todaysExecutedOrders.Add(tempOrder);
 
                 bankAProxy.updateStock(id);
+                ordersToExecute.RemoveAt(dataGridUnexecuted.SelectedCells[0].RowIndex);
                 updateUnexecutedOrders();
                 updateExecutedOrders();
                 Cliente client = bankAProxy.getClient(tempOrder.Client_id);
@@ -124,7 +126,8 @@ namespace ExchangeService
         {
             try
             {
-                ordersToExecute = bankAProxy.getUnexecutedOrders().ToList();
+                //ordersToExecute = bankAProxy.getUnexecutedOrders().ToList();
+
                 dataGridUnexecuted.Rows.Clear();
                 foreach (Order order in ordersToExecute)
                 {
@@ -173,7 +176,7 @@ namespace ExchangeService
                 using (var message = new MailMessage("luismiguel667@hotmail.com", client.Email)
                 {
                     Subject = "Your Order has been executed",
-                    Body = "Dear "+ client.Name + ", \n Congratulations! Your order has been executed. Your " + type + " of " + quantity + " actions, for a total of " + value + "€. \n"
+                    Body = "Dear "+ client.Name + ", \n Congratulations! Your order has been executed. Your " + type + " of " + quantity + " shares, for a total of " + value + "€. \n"
                 })
                 {
                     smtp.Send(message);
@@ -187,12 +190,13 @@ namespace ExchangeService
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            updateUnexecutedOrders();
+            
             List<string> msg = receiveMessages();
             foreach (string s in msg)
             {
                 Console.WriteLine("Message");
             }
+            updateUnexecutedOrders();
         }
     }
 }

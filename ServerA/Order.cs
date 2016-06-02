@@ -134,10 +134,11 @@ namespace ServerA
                 execution_date = value;
             }
         }
+        /*
         public override string ToString()
         {
             return id.ToString() + " " + client_id.ToString() + " " + state + " " + value + " " + quantity + " " + creation_date.ToString() + " " + execution_date.ToString() + "\n";
-        }
+        }*/
     }
 }
 

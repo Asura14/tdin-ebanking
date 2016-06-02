@@ -34,7 +34,7 @@ namespace Client
                 {
                     Company c = bankAProxy.getCompany(ped.Company_id);
                     Cliente cl = bankAProxy.getClient(ped.Client_id);
-                    string[] temp = { c.Name, cl.Name, ped.Creation_date.ToString(), ped.Quantity.ToString(), ped.State, ped.Type, ped.Value.ToString() };
+                    string[] temp = { ped.Id.ToString(), c.Name, cl.Name, ped.Creation_date.ToString(), ped.Quantity.ToString(), ped.State, ped.Type, ped.Value.ToString() };
                     ordersList.Rows.Add(temp);
                 }
             }
@@ -52,7 +52,8 @@ namespace Client
 
         private void delButton_Click(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 string selecionado = ordersList.SelectedCells[0].Value.ToString();
                 int id = Int32.Parse(selecionado);
                 bankAProxy.deleteOrder(id);

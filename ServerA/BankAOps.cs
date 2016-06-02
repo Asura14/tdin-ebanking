@@ -20,13 +20,15 @@ namespace BankA
             double stockPrice = getCompanyStockPrice(company_id);
             try
             {
+                string date = (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss");
                 conn.Open();
-                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'buy', " + (amount * stockPrice) + ", " + amount + ", '" + (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss") + "', null, " + company_id + ")";
+                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'buy', " + (amount * stockPrice) + ", " + amount + ", '" + date + "', null, " + company_id + ")";
                 Console.WriteLine(sqlcmd);
                 SqlCommand cmd = new SqlCommand(sqlcmd, conn);
                 rows = cmd.ExecuteNonQuery();
                 if (rows == 1)
                 {
+                    int size = getOrders().Count;
                     OperationContext.Current.SetTransactionComplete();
                     MessageQueue messageQueue = null;
                     if (MessageQueue.Exists(@".\Private$\supervisor"))
@@ -36,8 +38,9 @@ namespace BankA
                         {
                             using (MessageQueueTransaction trans = new MessageQueueTransaction())
                             {
+                                string send = "+" + size + "+" + company_id.ToString() + "+" + "buy+" + amount + "+" + date.ToString() + "+" + client_id.ToString() + "+" + (stockPrice*amount).ToString() + "+";
                                 trans.Begin();
-                                messageQueue.Send("Ordem enviada", trans);
+                                messageQueue.Send(send, trans);
                                 trans.Commit();
                             }
                         }
@@ -64,12 +67,33 @@ namespace BankA
             double stockPrice = getCompanyStockPrice(company_id);
             try
             {
+                string date = (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss");
                 conn.Open();
-                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'sell', " + (amount * stockPrice) + ", " + amount + ", '" + (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss") + "', null, " + company_id + " )";
+                string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'sell', " + (amount * stockPrice) + ", " + amount + ", '" + date + "', null, " + company_id + " )";
                 SqlCommand cmd = new SqlCommand(sqlcmd, conn);
                 rows = cmd.ExecuteNonQuery();
                 if (rows == 1)
+                {
+                    int size = getOrders().Count;
                     OperationContext.Current.SetTransactionComplete();
+                    MessageQueue messageQueue = null;
+                    if (MessageQueue.Exists(@".\Private$\supervisor"))
+                    {
+                        messageQueue = new MessageQueue(@".\Private$\supervisor");
+                        if (messageQueue.Transactional == true)
+                        {
+                            using (MessageQueueTransaction trans = new MessageQueueTransaction())
+                            {
+                                string send = "+" + size + "+" + company_id.ToString() + "+" + "sell+" + amount + "+" + date.ToString() + "+" + client_id.ToString() + "+" + (stockPrice * amount).ToString() + "+";
+                                trans.Begin();
+                                messageQueue.Send(send, trans);
+                                trans.Commit();
+                            }
+                        }
+                    }
+                    else
+                        messageQueue.Send("First ever Message is sent to MSMQ");
+                }
             }
             finally
             {
@@ -123,8 +147,6 @@ namespace BankA
                             order.Type = (string)results.GetValue(3);
                             order.Value = Convert.ToInt32(results.GetValue(4));
                             order.Quantity = Convert.ToInt32(results.GetValue(5));
-                            //DateTime dt;
-                            //DateTime.TryParse((string)results.GetValue(6),out dt);
                             order.Creation_date = (DateTime)results.GetValue(6);
                             order.Company_id = Convert.ToInt32(results.GetValue(8));
                             orderList.Add(order);
@@ -420,6 +442,52 @@ namespace BankA
                 conn.Close();
             }
             return company;
+        }
+
+        public List<Order> getOrders()
+        {
+            {
+                List<Order> orderList = new List<Order>();
+                SqlConnection conn = new SqlConnection(connString);
+                try
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT* FROM Stock";
+                    cmd.Parameters.AddWithValue("unexecuted", "unexecuted");
+                    cmd.CommandTimeout = 0;
+                    using (SqlDataReader results = cmd.ExecuteReader())
+                    {
+                        while (results.Read())
+                        {
+                            Order order = new Order();
+                            order.Id = Convert.ToInt32(results["id"]);
+                            order.Client_id = Convert.ToInt32(results.GetValue(1));
+                            order.State = (string)results.GetValue(2);
+                            order.Type = (string)results.GetValue(3);
+                            order.Value = Convert.ToInt32(results.GetValue(4));
+                            order.Quantity = Convert.ToInt32(results.GetValue(5));
+                            order.Creation_date = (DateTime)results.GetValue(6);
+                            order.Company_id = Convert.ToInt32(results.GetValue(8));
+                            orderList.Add(order);
+
+                            Console.WriteLine(order.ToString());
+                        }
+                        results.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return orderList;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+                return orderList;
+            }
         }
     }
 }
