@@ -30,10 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.ordersList = new System.Windows.Forms.DataGridView();
-            this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.addButton = new System.Windows.Forms.Button();
-            this.delButton = new System.Windows.Forms.Button();
-            this.buttonRefresh = new System.Windows.Forms.Button();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Company = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Client_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +38,10 @@
             this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Typ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.addButton = new System.Windows.Forms.Button();
+            this.delButton = new System.Windows.Forms.Button();
+            this.buttonRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ordersList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -60,46 +60,12 @@
             this.State,
             this.Typ,
             this.Value});
-            this.ordersList.Location = new System.Drawing.Point(0, 0);
+            this.ordersList.Location = new System.Drawing.Point(12, 2);
             this.ordersList.Name = "ordersList";
             this.ordersList.ReadOnly = true;
             this.ordersList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ordersList.Size = new System.Drawing.Size(744, 308);
+            this.ordersList.Size = new System.Drawing.Size(839, 308);
             this.ordersList.TabIndex = 0;
-            // 
-            // orderBindingSource
-            // 
-            this.orderBindingSource.DataSource = typeof(Client.BankA.Order);
-            // 
-            // addButton
-            // 
-            this.addButton.Location = new System.Drawing.Point(92, 352);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(75, 23);
-            this.addButton.TabIndex = 1;
-            this.addButton.Text = "Add Order";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
-            // 
-            // delButton
-            // 
-            this.delButton.Location = new System.Drawing.Point(192, 352);
-            this.delButton.Name = "delButton";
-            this.delButton.Size = new System.Drawing.Size(75, 23);
-            this.delButton.TabIndex = 2;
-            this.delButton.Text = "Delete Order";
-            this.delButton.UseVisualStyleBackColor = true;
-            this.delButton.Click += new System.EventHandler(this.delButton_Click);
-            // 
-            // buttonRefresh
-            // 
-            this.buttonRefresh.Location = new System.Drawing.Point(637, 352);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
-            this.buttonRefresh.TabIndex = 3;
-            this.buttonRefresh.Text = "Refresh";
-            this.buttonRefresh.UseVisualStyleBackColor = true;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
             // ID
             // 
@@ -149,11 +115,45 @@
             this.Value.Name = "Value";
             this.Value.ReadOnly = true;
             // 
+            // orderBindingSource
+            // 
+            this.orderBindingSource.DataSource = typeof(Client.BankA.Order);
+            // 
+            // addButton
+            // 
+            this.addButton.Location = new System.Drawing.Point(92, 352);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(75, 23);
+            this.addButton.TabIndex = 1;
+            this.addButton.Text = "Add Order";
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // delButton
+            // 
+            this.delButton.Location = new System.Drawing.Point(192, 352);
+            this.delButton.Name = "delButton";
+            this.delButton.Size = new System.Drawing.Size(75, 23);
+            this.delButton.TabIndex = 2;
+            this.delButton.Text = "Delete Order";
+            this.delButton.UseVisualStyleBackColor = true;
+            this.delButton.Click += new System.EventHandler(this.delButton_Click);
+            // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.Location = new System.Drawing.Point(637, 352);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefresh.TabIndex = 3;
+            this.buttonRefresh.Text = "Refresh";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(744, 415);
+            this.ClientSize = new System.Drawing.Size(863, 415);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.delButton);
             this.Controls.Add(this.addButton);

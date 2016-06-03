@@ -51,6 +51,10 @@ namespace BankA
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void deleteOrder(int order_id);
+
+        [OperationContract]
+        List<Order> getOrders();
+
     }
 
 }

@@ -155,7 +155,7 @@ namespace ExchangeService
                 foreach (Order order in todaysExecutedOrders)
                 {
                     Console.Write(order.Id);
-                    string[] temp = { order.Id.ToString(), order.Client_id.ToString(), order.Creation_date.ToString(), order.Quantity.ToString(), order.State.ToString(), order.Type, order.Value.ToString(), order.Execution_date.ToString() };
+                    string[] temp = { order.Id.ToString(), order.Client_id.ToString(), order.Creation_date.ToString(), order.Quantity.ToString(), "executed", order.Type, order.Value.ToString(), order.Execution_date.ToString() };
                     dataGridExecuted.Rows.Add(temp);
                 }
             }

@@ -22,7 +22,7 @@ namespace Client
             bankAProxy = new BankAOpsClient();
 
             InitializeComponent();
-            atualizaLista(bankAProxy.getUnexecutedOrders().ToList());
+            atualizaLista(bankAProxy.getOrders().ToList());
         }
 
         private void atualizaLista(List<Order> orders)
@@ -57,7 +57,7 @@ namespace Client
                 string selecionado = ordersList.SelectedCells[0].Value.ToString();
                 int id = Int32.Parse(selecionado);
                 bankAProxy.deleteOrder(id);
-                atualizaLista(bankAProxy.getUnexecutedOrders().ToList());
+                atualizaLista(bankAProxy.getOrders().ToList());
             }
             catch (Exception exc)
             {
@@ -75,7 +75,7 @@ namespace Client
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            List<Order> orders = bankAProxy.getUnexecutedOrders().ToList();
+            List<Order> orders = bankAProxy.getOrders().ToList();
             atualizaLista(orders);
         }
     }

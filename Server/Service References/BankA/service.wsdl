@@ -45,9 +45,9 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServerA" />
+      <xsd:import schemaLocation="" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="" namespace="http://schemas.datacontract.org/2004/07/ServerA" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IBankAOps_buyStock_InputMessage">
@@ -128,6 +128,12 @@
   <wsdl:message name="IBankAOps_deleteOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:deleteOrderResponse" />
   </wsdl:message>
+  <wsdl:message name="IBankAOps_getOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:getOrders" />
+  </wsdl:message>
+  <wsdl:message name="IBankAOps_getOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getOrdersResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IBankAOps">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="buyStock">
       <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/buyStock" message="tns:IBankAOps_buyStock_InputMessage" />
@@ -180,6 +186,10 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="deleteOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/deleteOrder" message="tns:IBankAOps_deleteOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/deleteOrderResponse" message="tns:IBankAOps_deleteOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="getOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankAOps/getOrders" message="tns:IBankAOps_getOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankAOps/getOrdersResponse" message="tns:IBankAOps_getOrders_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="TcpOps" type="tns:IBankAOps">
@@ -300,6 +310,15 @@
     <wsdl:operation name="deleteOrder">
       <wsp:PolicyReference URI="#TcpOps_deleteOrder_policy" />
       <soap12:operation soapAction="http://tempuri.org/IBankAOps/deleteOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrders">
+      <soap12:operation soapAction="http://tempuri.org/IBankAOps/getOrders" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

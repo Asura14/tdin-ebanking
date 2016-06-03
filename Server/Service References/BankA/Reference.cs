@@ -387,6 +387,9 @@ namespace Server.BankA {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/deleteOrder", ReplyAction="http://tempuri.org/IBankAOps/deleteOrderResponse")]
         [System.ServiceModel.TransactionFlowAttribute(System.ServiceModel.TransactionFlowOption.Allowed)]
         void deleteOrder(int order_id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getOrders", ReplyAction="http://tempuri.org/IBankAOps/getOrdersResponse")]
+        Server.BankA.Order[] getOrders();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -466,6 +469,10 @@ namespace Server.BankA {
         
         public void deleteOrder(int order_id) {
             base.Channel.deleteOrder(order_id);
+        }
+        
+        public Server.BankA.Order[] getOrders() {
+            return base.Channel.getOrders();
         }
     }
 }

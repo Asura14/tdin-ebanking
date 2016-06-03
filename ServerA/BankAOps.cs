@@ -20,6 +20,7 @@ namespace BankA
             double stockPrice = getCompanyStockPrice(company_id);
             try
             {
+                int size = getNextIndex();
                 string date = (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss");
                 conn.Open();
                 string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'buy', " + (amount * stockPrice) + ", " + amount + ", '" + date + "', null, " + company_id + ")";
@@ -28,7 +29,6 @@ namespace BankA
                 rows = cmd.ExecuteNonQuery();
                 if (rows == 1)
                 {
-                    int size = getOrders().Count;
                     OperationContext.Current.SetTransactionComplete();
                     MessageQueue messageQueue = null;
                     if (MessageQueue.Exists(@".\Private$\supervisor"))
@@ -62,11 +62,13 @@ namespace BankA
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = false)]
         public void sellStock(int client_id, double amount, int company_id)
         {
+
             SqlConnection conn = new SqlConnection(connString);
             int rows;
             double stockPrice = getCompanyStockPrice(company_id);
             try
             {
+                int size = getNextIndex();
                 string date = (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss");
                 conn.Open();
                 string sqlcmd = "INSERT INTO Stock Values(" + client_id + ", 'unexecuted', 'sell', " + (amount * stockPrice) + ", " + amount + ", '" + date + "', null, " + company_id + " )";
@@ -74,7 +76,6 @@ namespace BankA
                 rows = cmd.ExecuteNonQuery();
                 if (rows == 1)
                 {
-                    int size = getOrders().Count;
                     OperationContext.Current.SetTransactionComplete();
                     MessageQueue messageQueue = null;
                     if (MessageQueue.Exists(@".\Private$\supervisor"))
@@ -475,6 +476,7 @@ namespace BankA
             }
             return company;
         }
+        
 
         public List<Order> getOrders()
         {
@@ -519,6 +521,36 @@ namespace BankA
                     conn.Close();
                 }
                 return orderList;
+            }
+        }
+        public int getNextIndex()
+        {
+            int number = 0;
+            {
+                List<Order> orderList = new List<Order>();
+                SqlConnection conn = new SqlConnection(connString);
+                try
+                {
+                    conn.Open();
+                    string sqlcmd = "SELECT IDENT_CURRENT('Stock')";
+                    SqlCommand cmd = new SqlCommand(sqlcmd, conn);
+                    using (SqlDataReader results = cmd.ExecuteReader())
+                    {
+                        if (results.Read())
+                        {
+                            number = Convert.ToInt32(results.GetValue(0));
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+                return number + 1;
             }
         }
     }

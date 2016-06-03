@@ -368,7 +368,7 @@ namespace Client.BankA {
         Client.BankA.Cliente getClient(int client_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getClientByEmail", ReplyAction="http://tempuri.org/IBankAOps/getClientByEmailResponse")]
-        Client.BankA.Cliente getClientByEmail(string mail);
+        Client.BankA.Cliente getClientByEmail(Client.BankA.Cliente cliente);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getClients", ReplyAction="http://tempuri.org/IBankAOps/getClientsResponse")]
         Client.BankA.Cliente[] getClients();
@@ -387,6 +387,9 @@ namespace Client.BankA {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/deleteOrder", ReplyAction="http://tempuri.org/IBankAOps/deleteOrderResponse")]
         [System.ServiceModel.TransactionFlowAttribute(System.ServiceModel.TransactionFlowOption.Allowed)]
         void deleteOrder(int order_id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBankAOps/getOrders", ReplyAction="http://tempuri.org/IBankAOps/getOrdersResponse")]
+        Client.BankA.Order[] getOrders();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -444,8 +447,8 @@ namespace Client.BankA {
             return base.Channel.getClient(client_id);
         }
         
-        public Client.BankA.Cliente getClientByEmail(string mail) {
-            return base.Channel.getClientByEmail(mail);
+        public Client.BankA.Cliente getClientByEmail(Client.BankA.Cliente cliente) {
+            return base.Channel.getClientByEmail(cliente);
         }
         
         public Client.BankA.Cliente[] getClients() {
@@ -466,6 +469,10 @@ namespace Client.BankA {
         
         public void deleteOrder(int order_id) {
             base.Channel.deleteOrder(order_id);
+        }
+        
+        public Client.BankA.Order[] getOrders() {
+            return base.Channel.getOrders();
         }
     }
 }

@@ -38,10 +38,7 @@
 	    	'User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.1'
 	    	);
 	    $response = curlWrap($get_url,json_encode($order),'POST',$headers);
-	    echo $response;
-	    if($response == "success"){
 	    	header("Location: dashboard.php");
-	    }
 	}
 ?>
 
